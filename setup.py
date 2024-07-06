@@ -3,7 +3,7 @@
 # License: BSD 3 clause
 
 from setuptools import setup
-import seaborn_analyzer
+import openBOS
 
 DESCRIPTION = "the library of Background Oriented Schlieren"
 NAME = 'openBOS'
@@ -12,7 +12,7 @@ AUTHOR_EMAIL = 'ogayuuki0202@gmail.com'
 URL = 'https://github.com/ogayuuki0202/openBOS'
 LICENSE = 'Apache License Version 2.0,'
 DOWNLOAD_URL = 'https://github.com/c60evaporator/seaborn-analyzer'
-VERSION = seaborn_analyzer.__version__
+VERSION = openBOS.__version__
 PYTHON_REQUIRES = ">=3.6"
 
 INSTALL_REQUIRES = [
@@ -24,10 +24,7 @@ INSTALL_REQUIRES = [
 ]
 
 EXTRAS_REQUIRE = {
-    'tutorial': [
-        'mlxtend>=0.18.0',
-        'xgboost>=1.4.2',
-    ]
+    
 }
 
 PACKAGES = [
@@ -36,7 +33,7 @@ PACKAGES = [
 
 CLASSIFIERS = [
     'Intended Audience :: Science/Research',
-    'License :: OSI Approved :: BSD License',
+    'License :: Apache LicenseVersion 2.0',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
@@ -49,7 +46,7 @@ CLASSIFIERS = [
     'Framework :: Matplotlib',
 ]
 
-with open('README.rst', 'r') as fp:
+with open('README.md', 'r') as fp:
     readme = fp.read()
 with open('CONTACT.txt', 'r') as fp:
     contacts = fp.read()

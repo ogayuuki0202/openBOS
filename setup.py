@@ -8,7 +8,7 @@ import openBOS
 DESCRIPTION = "the library of Background Oriented Schlieren"
 NAME = 'openBOS'
 AUTHOR = 'Yuki Ogasawara'
-AUTHOR_EMAIL = 'ogayuuki0202@gmail.com'
+AUTHOR_EMAIL = 'yukiogasawara.research@gmail.com'
 URL = 'https://github.com/ogayuuki0202/openBOS'
 LICENSE = 'Apache License Version 2.0,'
 DOWNLOAD_URL = 'https://github.com/c60evaporator/seaborn-analyzer'
@@ -19,7 +19,6 @@ INSTALL_REQUIRES = [
     'matplotlib>=3.3.4',
     'numpy >=1.20.3',
     'pandas>=1.2.4',
-    'matplotlib>=3.3.4',
 
 ]
 

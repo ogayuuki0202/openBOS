@@ -10,7 +10,7 @@ Maintainer: Yuuki Ogasawara
 Maintainer-email: yukiogasawara.research@gmail.com
 License: GNU GENERAL PUBLIC LICENSE,
 Classifier: Intended Audience :: Science/Research
-Classifier: License :: Apache LicenseVersion 2.0
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
 Classifier: Programming Language :: Python :: 3
 Classifier: Programming Language :: Python :: 3.6
 Classifier: Programming Language :: Python :: 3.7

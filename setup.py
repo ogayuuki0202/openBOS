@@ -33,7 +33,7 @@ PACKAGES = [
 
 CLASSIFIERS = [
     'Intended Audience :: Science/Research',
-    'License :: Apache LicenseVersion 2.0',
+    'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',

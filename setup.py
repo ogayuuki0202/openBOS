@@ -4,7 +4,7 @@
 
 from setuptools import setup
 import openBOS
-
+VERSION="0.0.2"
 DESCRIPTION = "the library of Background Oriented Schlieren"
 NAME = 'openBOS'
 AUTHOR = 'Yuuki Ogasawara'

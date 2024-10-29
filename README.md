@@ -1,5 +1,9 @@
 # openBOS
 openBOS is a library developed to provide open access to various methods of the BOS method. We are also developing software that runs on a GUI for those who do not have Python skills.
+
+## Key Features
+- nothing
+
 ## Warning
 
 The openBOS python version is still in its *beta* state. This means that
@@ -9,12 +13,17 @@ is very welcome, especially if you can contribute with new algorithms and featur
 ## Installing
 Use PyPI: <https://pypi.python.org/pypi/openBOS>:
 
-    pip install openBOS
+    pip install openBOS 
 
 ## Methods
 
 Please see our wiki below.
 [Wiki](https://github.com/ogayuuki0202/openBOS/wiki)
+
+## Getting Started
+Here's a quick example of using openBOS for flow visualization:
+1. [Quick visualization]()
+2. [Three dimentionally reconstruction]()
 
 ## Contributors
 1. [Yuuki Ogasawara](https://orcid.org/0009-0004-0350-2185)
@@ -24,3 +33,6 @@ Please see our wiki below.
 If you find this project useful, please cite:
 
     Yuuki Ogasawara, Ayumu Ishibashi, Shinsuke Udagawa. openBOS:Background oriented shlieren methods in Python. https://github.com/ogayuuki0202/openBOS
+
+## How to Contribute
+We welcome contributions! If you’d like to report a bug or request a feature, please open an issue on our [GitHub Issues page](https://github.com/ogayuuki0202/openBOS/issues). We also encourage pull requests for new algorithms and improvements to the library.

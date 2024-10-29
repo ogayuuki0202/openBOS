@@ -21,7 +21,7 @@ Use PyPI: <https://pypi.python.org/pypi/openBOS>:
 Download the package from the Github: https://github.com/ogayuuki0202/openBOS/archive/refs/heads/main.zip
 or clone using git
 
-    gh repo clone ogayuuki0202/openBOS
+    git clone https://github.com/ogayuuki0202/openBOS.git
 
 For the global installation, use:
 

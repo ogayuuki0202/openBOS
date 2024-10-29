@@ -10,8 +10,8 @@ NAME = 'openBOS'
 AUTHOR = 'Yuuki Ogasawara'
 AUTHOR_EMAIL = 'yukiogasawara.research@gmail.com'
 URL = 'https://github.com/ogayuuki0202/openBOS'
-License-File: LICENSE
-DOWNLOAD_URL = 'https://github.com/ogayuuki0202/openBOS'
+LICENSE = 'GNU GENERAL PUBLIC LICENSE,'
+DOWNLOAD_URL = 'https://github.com/c60evaporator/seaborn-analyzer'
 VERSION = openBOS.__version__
 PYTHON_REQUIRES = ">=3.6"
 

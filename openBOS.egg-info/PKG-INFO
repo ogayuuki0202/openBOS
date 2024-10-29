@@ -3,10 +3,10 @@ Name: openBOS
 Version: 0.0.1
 Summary: the library of Background Oriented Schlieren
 Home-page: https://github.com/ogayuuki0202/openBOS
-Download-URL: https://github.com/c60evaporator/seaborn-analyzer
-Author: Yuki Ogasawara
+Download-URL: https://github.com/ogayuuki0202/openBOS
+Author: Yuuki Ogasawara
 Author-email: yukiogasawara.research@gmail.com
-Maintainer: Yuki Ogasawara
+Maintainer: Yuuki Ogasawara
 Maintainer-email: yukiogasawara.research@gmail.com
 License: GNU GENERAL PUBLIC LICENSE,
 Classifier: Intended Audience :: Science/Research

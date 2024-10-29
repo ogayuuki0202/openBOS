@@ -1,2 +1,26 @@
 # openBOS
-the library of Background Oriented Schlieren
+openBOS is a library developed to provide open access to various methods of the BOS method. We are also developing software that runs on a GUI for those who do not have Python skills.
+## Warning
+
+The openBOS python version is still in its *beta* state. This means that
+it still might have some bugs and the API may change. However, testing and contributing
+is very welcome, especially if you can contribute with new algorithms and features.
+
+## Installing
+Use PyPI: <https://pypi.python.org/pypi/openBOS>:
+
+    pip install openBOS
+
+## Methods
+
+Please see our wiki below.
+[Wiki](https://github.com/ogayuuki0202/openBOS/wiki)
+
+## Contributors
+1. [Yuuki Ogasawara](https://orcid.org/0009-0004-0350-2185)
+2. Ayumu Ishibashi 
+3. Shinsuke Udagawa
+## How to cite this work
+If you find this project useful, please cite:
+
+    Yuuki Ogasawara, Ayumu Ishibashi, Shinsuke Udagawa. openBOS:Background oriented shlieren methods in Python. https://github.com/ogayuuki0202/openBOS

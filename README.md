@@ -1,5 +1,5 @@
 # openBOS
-openBOS is a library developed to provide open access to various methods of the BOS method. We are also developing software that runs on a GUI for those who do not have Python skills.
+openBOS is a library developed to provide open access to various methods of the Background Oriented Schlieren (BOS) method. We are also developing software that runs on a GUI for those who do not have Python skills.
 
 ## Key Features
 - nothing

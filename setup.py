@@ -19,6 +19,7 @@ INSTALL_REQUIRES = [
     'matplotlib>=3.3.4',
     'numpy >=1.20.3',
     'pandas>=1.2.4',
+    'scikit-image>=0.24.0',
 
 ]
 

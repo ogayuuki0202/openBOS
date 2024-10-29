@@ -26,6 +26,7 @@ License-File: LICENSE
 Requires-Dist: matplotlib>=3.3.4
 Requires-Dist: numpy>=1.20.3
 Requires-Dist: pandas>=1.2.4
+Requires-Dist: scikit-image>=0.24.0
 
 # openBOS
 the library of Background Oriented Schlieren

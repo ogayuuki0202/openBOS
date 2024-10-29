@@ -3,6 +3,8 @@ README.md
 setup.py
 openBOS/__init__.py
 openBOS/hello.py
+openBOS/shift.py
+openBOS/utils.py
 openBOS.egg-info/PKG-INFO
 openBOS.egg-info/SOURCES.txt
 openBOS.egg-info/dependency_links.txt

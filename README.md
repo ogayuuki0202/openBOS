@@ -16,6 +16,18 @@ Use PyPI: <https://pypi.python.org/pypi/openBOS>:
 
     pip install openBOS 
 
+### To build from source
+
+Download the package from the Github: https://github.com/ogayuuki0202/openBOS/archive/refs/heads/main.zip
+or clone using git
+
+    gh repo clone ogayuuki0202/openBOS
+
+For the global installation, use:
+
+    python setup.py install 
+
+
 ## Methods
 
 Please see our wiki below.

@@ -50,8 +50,11 @@ def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray):
     """
 
     #streach the image vertivally *10
-    ar_ref = ib.stretch_image_vertically(ref_array,10)
-    ar_exp = ib.stretch_image_vertically(exp_array,10)
+    #ar_ref = ib.stretch_image_vertically(ref_array,10)
+    #ar_exp = ib.stretch_image_vertically(exp_array,10)
+
+    ar_ref = ref_array
+    ar_exp = exp_array
 
     # Binarization
     bin_ref = ib.biner_thresh(ar_ref, 128)

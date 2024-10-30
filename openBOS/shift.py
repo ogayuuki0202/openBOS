@@ -1,6 +1,6 @@
 from skimage.metrics import structural_similarity as ssm
 import numpy as np
-import libs as ib
+import openBOS.shift_utils as ib
 
 def SSIM(ref_array : np.ndarray, exp_array : np.ndarray):
     """

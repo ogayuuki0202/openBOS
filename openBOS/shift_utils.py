@@ -224,3 +224,53 @@ def stretch_image_vertically(image: np.ndarray, scale_factor: int) -> np.ndarray
     stretched_image = np.repeat(image, scale_factor, axis=0)
 
     return stretched_image
+
+def cycle(ref_array: np.ndarray):
+    """
+    Calculate the cycle length of stripes in a reference image.
+
+    This function processes the input reference image by stretching it vertically,
+    binarizing it, detecting the upper and lower boundaries of stripes, and then
+    calculating the average distance between these boundaries to determine the cycle length.
+
+    Parameters:
+    ----------
+    ref_array : np.ndarray
+        The reference image to be analyzed, provided as a 2D numpy array.
+
+    Returns:
+    -------
+    float
+        The calculated cycle length based on the detected boundaries in the reference image.
+    """
+    
+    # Vertically stretch the reference image by a factor of 10
+    im_ref = np.repeat(ref_array, 10, axis=0)
+    
+    # Convert the stretched image to a numpy array
+    ar_ref = np.array(im_ref)
+    
+    # Binarize the stretched image using a threshold of 128
+    bin_ref = biner_thresh(ar_ref, 128)
+    
+    # Detect upper and lower boundaries in the binarized image
+    ref_u, ref_d = bin_indexer(bin_ref)
+    
+    # Mix the upper and lower boundary coordinates to find the midpoints
+    ref = mixing(ref_u, ref_d)
+    
+    # Calculate the intervals between midpoints by finding differences
+    ref_interbal = np.delete(ref, 0, 0) - np.delete(ref, ref.shape[0] - 1, 0)
+    
+    # Count the number of valid intervals (non-NaN values)
+    count = np.count_nonzero(~np.isnan(ref_interbal[:, 0]))
+    
+    # Trim the intervals array to exclude unnecessary values
+    ref_interbal = ref_interbal[0:count - 2]
+    
+    # Calculate the cycle length as twice the average interval length
+    # This accounts for both peaks and valleys in the detected boundaries
+    cycle = np.nanmean(ref_interbal) * 2
+    
+    return cycle
+

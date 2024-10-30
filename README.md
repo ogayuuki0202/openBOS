@@ -41,7 +41,8 @@ Here's a quick example of using openBOS for flow visualization:
 ## Contributors
 1. [Yuuki Ogasawara](https://orcid.org/0009-0004-0350-2185)
 2. Ayumu Ishibashi 
-3. Shinsuke Udagawa
+3. Narumi Nose
+3. [Shinsuke Udagawa](https://www.researchgate.net/profile/Shinsuke-Udagawa)
 ## How to cite this work
 If you find this project useful, please cite:
 

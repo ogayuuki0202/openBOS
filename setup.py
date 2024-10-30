@@ -21,6 +21,7 @@ INSTALL_REQUIRES = [
     'pandas>=1.2.4',
     'scikit-image>=0.24.0',
     'tqdm >=4.0',
+    'metpy >= 1.6'
 ]
 
 EXTRAS_REQUIRE = {

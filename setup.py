@@ -4,7 +4,7 @@
 
 from setuptools import setup
 import openBOS
-VERSION="0.0.2"
+
 DESCRIPTION = "the library of Background Oriented Schlieren"
 NAME = 'openBOS'
 AUTHOR = 'Yuuki Ogasawara'
@@ -17,10 +17,9 @@ PYTHON_REQUIRES = ">=3.6"
 
 INSTALL_REQUIRES = [
     'matplotlib>=3.3.4',
-    'numpy >=1.20.3',
+    'numpy>=1.20.3, <2.0',
     'pandas>=1.2.4',
     'scikit-image>=0.24.0',
-
 ]
 
 EXTRAS_REQUIRE = {

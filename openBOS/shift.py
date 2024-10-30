@@ -2,7 +2,7 @@ from skimage.metrics import structural_similarity as ssm
 import numpy as np
 import libs as ib
 
-def ssim(ref_array,exp_array):
+def SSIM(ref_array,exp_array):
 
     # compute the strucutural similarity matrix (SSM) on the grayscaled images
     (score, diff) = ssm(ref_array, exp_array, full=True)
@@ -10,7 +10,7 @@ def ssim(ref_array,exp_array):
     return  diff_inv
 
 
-def main_process(ref_array,exp_array):
+def SP_BOS(ref_array,exp_array):
     ar_ref=ref_array
     ar_exp=exp_array
 

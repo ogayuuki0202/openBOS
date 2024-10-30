@@ -1,5 +1,8 @@
 import numpy as np
 import openBOS.shift_utils as ib
+from metpy.units import units
+from metpy.calc import density
+
 
 def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, resolution_of_pattern: float, Lb: float, Lci: float):
     """
@@ -44,3 +47,24 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
     np.nan_to_num(angle, copy=False)  # Replace NaN values with zero in the angle array
 
     return angle, Lc, Li, projection_ratio
+
+def get_G(temperature, pressure, humidity):
+    """
+    Calculate the Gladstone constant based on temperature, pressure, and humidity.
+
+    Parameters:
+    temperature (float): The temperature in degrees Celsius (°C).
+    pressure (float): The pressure in hectopascals (hPa).
+    humidity (float): The humidity as a percentage (%).
+
+    Returns:
+    float: The calculated Gladstone-Dale constant (G).
+    """
+
+    # Calculate the density using the given pressure, temperature, and humidity
+    density_inf = density(pressure * units.hPa, temperature * units.degC, humidity * units.percent)
+
+    n_inf = 1.0003  # Refractive index of air
+    G = (n_inf - 1) / density_inf  # Gladstone-Dale Relation
+    return G
+

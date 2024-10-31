@@ -1,5 +1,8 @@
 import numpy as np
 from tqdm import tqdm
+import torch      
+from reconstruction_utils import ART  
+from tqdm.contrib import tzip                              
 
 def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
     """
@@ -27,9 +30,7 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
     """
     
     # Offset the angle values by subtracting the mean value at the reference x-coordinate
-    angle = angle - np.mean(angle[0:200, ref_x])
-
-    print(center)
+    angle = angle - np.mean(angle[0:angle.shape[0]/20, ref_x])
     
     # Remove values below the center since they are not used in the calculation
     angle = angle[0:center]
@@ -64,3 +65,87 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
     density = ans / G
 
     return density
+
+import torch
+import numpy as np
+
+def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float):
+    """
+    Perform Algebraic Reconstruction Technique (ART) on a sinogram using GPU.
+    
+    This function applies ART for tomographic reconstruction by iteratively adjusting 
+    predictions to reduce the residual between predictions and target sinogram values. 
+    The process runs on GPU if available for faster computation.
+    
+    Parameters:
+    sinogram (np.ndarray): Input sinogram with shape [N, Size, Angle].
+    batch_size (int): Number of samples per batch.
+    eps (float): Tolerance for stopping the iterative process based on residual.
+
+    Returns:
+    torch.Tensor: Reconstructed image tensor concatenated across all processed batches.
+    """
+    # Check device availability and set it to GPU if available
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print("Device:", device)
+
+    # Convert sinogram to a torch tensor and move it to the selected device
+    sinogram_tensor = torch.FloatTensor(sinogram).permute(0, 2, 1).to(device)
+
+    # Create data loaders for target and initial predictions
+    target_dataloader = torch.utils.data.DataLoader(sinogram_tensor, batch_size=batch_size, shuffle=False)
+    predict_dataloader = torch.utils.data.DataLoader(torch.zeros_like(sinogram_tensor), batch_size=batch_size, shuffle=False)
+
+    dataloaders_dict = {"target": target_dataloader, "predict": predict_dataloader}
+
+    # Initialize the ART model with the input sinogram
+    model = ART(sinogram=sinogram)
+
+    # Extract data loaders
+    predict_dataloader = dataloaders_dict["predict"]
+    target_dataloader = dataloaders_dict["target"]
+
+    processed_batches = []
+
+    # Convergence parameters
+    tolerance = 1e-24
+    max_stable_iters = 1000000
+    prev_loss = float('inf')
+
+    # Iterate through the data loader batches
+    for i, (predict_batch, target_batch) in enumerate(tzip(predict_dataloader, target_dataloader)):
+        # Move batches to the device
+        predict_batch = predict_batch.to(model.device)
+        target_batch = target_batch.to(model.device)
+        stable_count = 0  # Counter for stable iterations
+
+        iter_count = 0
+        ATA = model.AT(model.A(torch.ones_like(predict_batch)))  # Precompute ATA for normalization
+        ave_loss = torch.inf  # Initialize average loss
+
+        # Initial loss calculation
+        loss = torch.divide(model.AT(target_batch - model.A(predict_batch)), ATA)
+        ave_loss = torch.max(torch.abs(loss)).item()
+
+        # ART Iterative Reconstruction Loop
+        while ave_loss > eps and stable_count < max_stable_iters:
+            predict_batch = predict_batch + loss  # Update prediction
+            ave_loss = torch.max(torch.abs(loss)).item()
+            print("\r", f'Iteration: {iter_count}, Residual: {ave_loss}, Stable Count: {stable_count}', end="")
+            iter_count += 1
+
+            # Recalculate loss
+            loss = torch.divide(model.AT(target_batch - model.A(predict_batch)), ATA)
+
+            # Check residual change to update stable count
+            if abs(ave_loss - prev_loss) < tolerance:
+                stable_count += 1
+            else:
+                stable_count = 0
+
+            prev_loss = ave_loss
+
+        processed_batches.append(predict_batch)
+
+    # Concatenate all processed batches along the batch dimension and return
+    return torch.cat(processed_batches, dim=0)

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: openBOS
-Version: 0.0.6
+Version: 0.0.7
 Summary: the library of Background Oriented Schlieren
 Home-page: https://github.com/ogayuuki0202/openBOS
 Download-URL: https://github.com/ogayuuki0202/openBOS
@@ -29,6 +29,7 @@ Requires-Dist: pandas>=1.2.4
 Requires-Dist: scikit-image>=0.24.0
 Requires-Dist: tqdm>=4.0
 Requires-Dist: metpy>=1.6
+Requires-Dist: pillow>=11.0
 
 # openBOS
 openBOS is a library developed to provide open access to various methods of the Background Oriented Schlieren (BOS) method. We are also developing software that runs on a GUI for those who do not have Python skills.

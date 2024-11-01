@@ -66,7 +66,7 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
 
     return density
 
-def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float,tolerance:float =1e-24,max_stable_iters:int=1000000):
+def ART(sinogram: np.ndarray, batch_size: int, device:str, eps: float,tolerance:float =1e-24,max_stable_iters:int=1000000):
     """
     Perform Algebraic Reconstruction Technique (ART) on a sinogram using GPU.
     
@@ -76,17 +76,17 @@ def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float,tolerance:float =1
     
     Parameters:
     sinogram (np.ndarray): Input sinogram with shape [N, Size, Angle].
-    batch_size (int): Number of samples per batch.
+    batch_size (int): Number of samples per batch.If you use CPU for the processing,Batchsize=1 is recomennded.
+    device (str) : 'cuda' or 'cpu'
     eps (float): Tolerance for stopping the iterative process based on residual.
+
     tolerance (float): The difference threshold for loss change to consider convergence stable.
     max_stable_iters (int): Maximum number of iterations with stable residuals allowed for convergence.
 
     Returns:
     torch.Tensor: Reconstructed image tensor concatenated across all processed batches.
     """
-    # Check device availability and set it to GPU if available
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print("Device:", device)
+
 
     # Convert sinogram to a torch tensor and move it to the selected device
     sinogram_tensor = torch.FloatTensor(sinogram).permute(0, 2, 1).to(device)

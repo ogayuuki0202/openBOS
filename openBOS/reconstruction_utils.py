@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch_radon import Radon
 import numpy as np
 
+
 class ART_torch(nn.Module):
     """
     Algebraic Reconstruction Technique (ART) model for tomography using the Radon transform.

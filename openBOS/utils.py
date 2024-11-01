@@ -2,7 +2,7 @@ import numpy as np
 import openBOS.shift_utils as ib
 from metpy.units import units
 from metpy.calc import density
-from tqdm import tqdm
+from tqdm import tqdm,trange
 
 def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, resolution_of_pattern: float, Lb: float, Lci: float):
     """
@@ -92,3 +92,102 @@ def sinogram_maker_axialsymmetry(angle):
         sinogram[i] = np.broadcast_to(d_angle[:, np.newaxis], (height, height))
         
     return sinogram
+
+def compute_laplacian_chunk_2D(array_chunk:np.ndarray):
+    """
+    Computes the Laplacian of a given chunk by calculating gradients 
+    along specific axes and summing them.
+    
+    Parameters:
+    array_chunk (ndarray): A chunk of the input array to compute the Laplacian on.
+
+    Returns:
+    ndarray: The Laplacian computed for the given chunk.
+    """
+    grad_yy = np.gradient(array_chunk, axis=1)  # Compute gradient along the y-axis
+    grad_zz = np.gradient(array_chunk, axis=2)  # Compute gradient along the z-axis
+    laplacian_chunk = grad_yy + grad_zz         # Sum gradients to approximate Laplacian
+    return laplacian_chunk
+
+def compute_laplacian_chunk_3D(array_chunk:np.ndarray):
+    """
+    Computes the Laplacian of a given chunk by calculating gradients 
+    along specific axes and summing them.
+    
+    Parameters:
+    array_chunk (ndarray): A chunk of the input array to compute the Laplacian on.
+
+    Returns:
+    ndarray: The Laplacian computed for the given chunk.
+    """
+    grad_xx = np.gradient(array_chunk, axis=0)
+    grad_yy = np.gradient(array_chunk, axis=1)  # Compute gradient along the y-axis
+    grad_zz = np.gradient(array_chunk, axis=2)  # Compute gradient along the z-axis
+    laplacian_chunk = grad_xx+ grad_yy + grad_zz         # Sum gradients to approximate Laplacian
+    return laplacian_chunk
+
+def compute_laplacian_in_chunks_2D(array:np.ndarray, chunk_size:int = 100):
+    """
+    Computes the Laplacian of an input array in smaller chunks, allowing for 
+    memory-efficient processing of large arrays.
+    
+    Parameters:
+    array (ndarray): Input array on which to compute the Laplacian.
+    chunk_size (int): Size of each chunk to split the array into for processing.
+
+    Returns:
+    ndarray: The Laplacian of the input array, computed in chunks.
+    """
+    # Get the shape of the input array
+    shape = array.shape
+    
+    # Initialize an array to store the Laplacian result
+    laplacian = np.zeros_like(array)
+    
+    # Process the array in chunks
+    for i in trange(0, shape[0], chunk_size):          # Loop over x-axis in chunks
+        for j in range(0, shape[1], chunk_size):       # Loop over y-axis in chunks
+            for k in range(0, shape[2], chunk_size):   # Loop over z-axis in chunks
+                # Extract the current chunk
+                chunk = array[i:i+chunk_size, j:j+chunk_size, k:k+chunk_size]
+                
+                # Compute the Laplacian for the current chunk
+                laplacian_chunk = compute_laplacian_chunk_2D(chunk)
+                
+                # Place the result in the corresponding location of the main array
+                laplacian[i:i+chunk_size, j:j+chunk_size, k:k+chunk_size] = laplacian_chunk
+    
+    return laplacian
+
+def compute_laplacian_in_chunks_3D(array:np.ndarray, chunk_size:int = 100):
+    """
+    Computes the Laplacian of an input array in smaller chunks, allowing for 
+    memory-efficient processing of large arrays.
+    
+    Parameters:
+    array (ndarray): Input array on which to compute the Laplacian.
+    chunk_size (int): Size of each chunk to split the array into for processing.
+
+    Returns:
+    ndarray: The Laplacian of the input array, computed in chunks.
+    """
+    # Get the shape of the input array
+    shape = array.shape
+    
+    # Initialize an array to store the Laplacian result
+    laplacian = np.zeros_like(array)
+    
+    # Process the array in chunks
+    for i in trange(0, shape[0], chunk_size):          # Loop over x-axis in chunks
+        for j in range(0, shape[1], chunk_size):       # Loop over y-axis in chunks
+            for k in range(0, shape[2], chunk_size):   # Loop over z-axis in chunks
+                # Extract the current chunk
+                chunk = array[i:i+chunk_size, j:j+chunk_size, k:k+chunk_size]
+                
+                # Compute the Laplacian for the current chunk
+                laplacian_chunk = compute_laplacian_chunk_3D(chunk)
+                
+                # Place the result in the corresponding location of the main array
+                laplacian[i:i+chunk_size, j:j+chunk_size, k:k+chunk_size] = laplacian_chunk
+    
+    return laplacian

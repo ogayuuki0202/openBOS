@@ -60,7 +60,9 @@ def bin_indexer(ar_in: np.ndarray) -> tuple:
     
     # Process each column to handle NaN values
     for x in range(ar_in.shape[1]):
-        ar_loop = u_index[:, x][~np.isnan(u_index[:, x])]
+
+        ar_loop=u_index[:,x][np.where(~np.isnan(u_index[:,x]))[0]]
+        u_index_2[:,x]=np.concatenate([ar_loop,np.full(1000-ar_loop.shape[0],np.nan)])
     
     # Detect negative gradient (lower boundary)
     d_tuple = np.where(ar4 < 0)

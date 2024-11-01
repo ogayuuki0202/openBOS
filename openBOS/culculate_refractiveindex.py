@@ -3,7 +3,7 @@ from tqdm import tqdm
 import numpy as np
 import torch
 
-def SOR(array_laplacian: np.ndarray, batch_size: int,device:str, omega_SOR: float,e: float,tolerance:float =1e-24,max_stable_iters:int=1000000):
+def SOR_2D(tensor_laplacian: torch.tensor, batch_size: int,device:str, omega_SOR: float,e: float,tolerance:float =1e-24,max_stable_iters:int=1000000):
     """
     Perform Successive Over-Relaxation (SOR) on a Laplacian array using GPU.
 
@@ -11,7 +11,7 @@ def SOR(array_laplacian: np.ndarray, batch_size: int,device:str, omega_SOR: floa
     Laplacian input array. If a GPU is available, computations are performed on the GPU for efficiency.
 
     Parameters:
-    array_laplacian (np.ndarray): Input Laplacian array with shape [N, Ly, Lz].
+    tensor_laplacian (torch.tensor): Input Laplacian array with shape [N, Ly, Lz].
     batch_size (int): Number of samples per batch.If you use CPU for the processing,Batchsize=1 is recomennded.
     device (str) : 'cuda' or 'cpu'
     omega_SOR (float): Relaxation factor for SOR, controls the convergence speed.
@@ -20,32 +20,23 @@ def SOR(array_laplacian: np.ndarray, batch_size: int,device:str, omega_SOR: floa
     max_stable_iters (int): Maximum number of iterations with stable residuals allowed for convergence.
 
     Returns:
-    torch.Tensor: The SOR-processed tensor concatenated across all batches.
+    np.ndarray: The SOR-processed array concatenated across all batches.
     """
-    # Check device availability and set it to GPU if available
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print("Device:", device)
-
     # Convert the input array to a torch tensor and move it to the selected device, set up data loader
-    array_laplacian_dataloader = torch.utils.data.DataLoader(
-        torch.tensor(array_laplacian).to(device), batch_size=batch_size, shuffle=False
+    tensor_laplacian_dataloader = torch.utils.data.DataLoader(
+        torch.tensor(tensor_laplacian).to(device), batch_size=batch_size, shuffle=False
     )
 
     # Extract dimensions from the input Laplacian array
-    Ly = array_laplacian.shape[1]
-    Lz = array_laplacian.shape[2]
+    Ly = tensor_laplacian.shape[1]
+    Lz = tensor_laplacian.shape[2]
 
-    # Convergence parameters
-    e = 1e-10
-    tolerance = 1e-24
-    max_stable_iters = 100000
-
+   
     # Initialize variables
     u_list = []  # List to store results for each batch
-    omega_SOR = 1.0  # Relaxation parameter
 
     # Iterate over each batch in the data loader
-    for batch_idx, batch in enumerate(array_laplacian_dataloader):
+    for batch_idx, batch in enumerate(tensor_laplacian_dataloader):
         # Move the batch to the device
         slice_laplacian = batch.to(device)
         batch_size, Ly, Lz = slice_laplacian.size()
@@ -96,4 +87,4 @@ def SOR(array_laplacian: np.ndarray, batch_size: int,device:str, omega_SOR: floa
     # Concatenate results for all batches and return as a single tensor
     u_tensor = torch.cat(u_list, dim=0)
 
-    return u_tensor
+    return np.array(u_tensor)

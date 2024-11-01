@@ -3,7 +3,7 @@ openBOS is a library developed to provide open access to various methods of the 
 
 ## Key Features
 - Short, concise code for visualization, 3D reconstruction, and quantification
-- GPU parallel processing also available
+- GPU parallel processing is also available
 
 ## Warning
 

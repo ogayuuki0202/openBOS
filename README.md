@@ -1,22 +1,34 @@
 # openBOS
 openBOS is a library developed to provide open access to various methods of the Background Oriented Schlieren (BOS) method. We are also developing software that runs on a GUI for those who do not have Python skills.
-# under construction! don't use codes. we will finish  developing soon.
 
 ## Key Features
-- nothing
+- Short, concise code for visualization, 3D reconstruction, and quantification
+- GPU parallel processing also available
 
 ## Warning
 
-The openBOS python version is still in its *beta* state. This means that
+The openBOS is still in its *beta* state. This means that
 it still might have some bugs and the API may change. However, testing and contributing
 is very welcome, especially if you can contribute with new algorithms and features.
 
 ## Installing
+### 1. Install PyTorch
+Please install Pytorch 2.x .
+Make sure that CUDA  is available if you  want use GPU for processing.
+<https://pytorch.org/get-started/locally/>
+### 2. Install torch_radon
+Please install torch_radon
+
+    git clone https://github.com/matteo-ronchetti/torch-radon.git
+    cd torch-radon
+    python setup.py install
+
+### 3. Install openBOS
 Use PyPI: <https://pypi.python.org/pypi/openBOS>:
 
     pip install openBOS 
 
-### To build from source
+Or compile from source
 
 Download the package from the Github: https://github.com/ogayuuki0202/openBOS/archive/refs/heads/main.zip
 or clone using git

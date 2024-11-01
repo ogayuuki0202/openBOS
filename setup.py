@@ -24,6 +24,7 @@ INSTALL_REQUIRES = [
     'metpy >= 1.6',
     "pillow >= 11.0",
     "torch-radon >= 1.0.0 ",
+    "torch >=2.0",
 ]
 
 EXTRAS_REQUIRE = {

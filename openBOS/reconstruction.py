@@ -1,7 +1,7 @@
 import numpy as np
 from tqdm import tqdm
 import torch      
-from reconstruction_utils import ART  
+from .reconstruction_utils import ART_torch  
 from tqdm.contrib import tzip                              
 
 def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
@@ -66,10 +66,7 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
 
     return density
 
-import torch
-import numpy as np
-
-def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float):
+def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float,tolerance:float =1e-24,max_stable_iters:int=1000000):
     """
     Perform Algebraic Reconstruction Technique (ART) on a sinogram using GPU.
     
@@ -81,6 +78,8 @@ def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float):
     sinogram (np.ndarray): Input sinogram with shape [N, Size, Angle].
     batch_size (int): Number of samples per batch.
     eps (float): Tolerance for stopping the iterative process based on residual.
+    tolerance (float): The difference threshold for loss change to consider convergence stable.
+    max_stable_iters (int): Maximum number of iterations with stable residuals allowed for convergence.
 
     Returns:
     torch.Tensor: Reconstructed image tensor concatenated across all processed batches.
@@ -99,7 +98,7 @@ def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float):
     dataloaders_dict = {"target": target_dataloader, "predict": predict_dataloader}
 
     # Initialize the ART model with the input sinogram
-    model = ART(sinogram=sinogram)
+    model = ART_torch(sinogram=sinogram)
 
     # Extract data loaders
     predict_dataloader = dataloaders_dict["predict"]
@@ -108,8 +107,7 @@ def ART_GPU(sinogram: np.ndarray, batch_size: int, eps: float):
     processed_batches = []
 
     # Convergence parameters
-    tolerance = 1e-24
-    max_stable_iters = 1000000
+
     prev_loss = float('inf')
 
     # Iterate through the data loader batches

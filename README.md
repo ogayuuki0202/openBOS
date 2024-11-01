@@ -14,7 +14,7 @@ is very welcome, especially if you can contribute with new algorithms and featur
 ## Installing
 ### 1. Install PyTorch
 Please install Pytorch 2.x .
-Make sure that CUDA  is available if you  want use GPU for processing.
+Make sure that CUDA  is available on your PC.
 <https://pytorch.org/get-started/locally/>
 ### 2. Install torch_radon
 Please install torch_radon　<https://torch-radon.readthedocs.io/en/latest/getting_started/install.html>

@@ -1,6 +1,6 @@
 # openBOS
 openBOS is a library developed to provide open access to various methods of the Background Oriented Schlieren (BOS) method. We are also developing software that runs on a GUI for those who do not have Python skills.
-# under construction! don't use codes. we will finish the developing soon.
+# under construction! don't use codes. we will finish  developing soon.
 
 ## Key Features
 - nothing
@@ -39,10 +39,10 @@ Here's a quick example of using openBOS for flow visualization:
 2. [3D quantitative visualization and measurement using ARTmethod(CT)]()
 
 ## Contributors
-1. [Yuuki Ogasawara](https://orcid.org/0009-0004-0350-2185)
-2. Ayumu Ishibashi 
-3. Narumi Nose
-3. [Shinsuke Udagawa](https://www.researchgate.net/profile/Shinsuke-Udagawa)
+- [Yuuki Ogasawara](https://orcid.org/0009-0004-0350-2185)
+- Ayumu Ishibashi 
+- Narumi Nose
+- [Shinsuke Udagawa](https://www.researchgate.net/profile/Shinsuke-Udagawa)
 ## How to cite this work
 If you find this project useful, please cite:
 

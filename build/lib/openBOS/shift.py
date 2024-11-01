@@ -53,9 +53,9 @@ def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray):
     im_ref=Image.fromarray(ref_array)
     im_exp=Image.fromarray(exp_array)
 
-    #streach the image vertivally *20
-    im_ref=im_ref.resize((im_ref.size[0],im_ref.size[1]*20))
-    im_exp=im_exp.resize((im_exp.size[0],im_exp.size[1]*20))
+    #streach the image vertivally *10
+    im_ref=im_ref.resize((im_ref.size[0],im_ref.size[1]*10))
+    im_exp=im_exp.resize((im_exp.size[0],im_exp.size[1]*10))
 
     ar_ref=np.array(im_ref)
     ar_exp=np.array(im_exp)

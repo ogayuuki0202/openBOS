@@ -52,7 +52,7 @@ def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray):
 
     im_ref=Image.fromarray(ref_array)
     im_exp=Image.fromarray(exp_array)
-    print("fromarray",im_ref.shape,im_exp.shape)
+    print("fromarray",ref_array.shape,exp_array.shape)
 
     #streach the image vertivally *10
     im_ref=im_ref.resize((im_ref.size[0],im_ref.size[1]*10))

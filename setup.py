@@ -23,12 +23,10 @@ INSTALL_REQUIRES = [
     'tqdm >=4.0',
     'metpy >= 1.6',
     "pillow >= 6.0",
-    "torch-radon >= 1.0.0 ",
-    "torch >=2.0",
 ]
 
 EXTRAS_REQUIRE = {
-    
+    "GPU":["torch-radon >= 1.0.0 ","torch >=2.0"]   
 }
 
 PACKAGES = [

@@ -49,25 +49,30 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
 
     return angle, Lc, Li, projection_ratio
 
-def get_G(temperature, pressure, humidity):
+def get_gladstone_dale_constant(temperature, pressure, humidity):
     """
-    Calculate the Gladstone constant based on temperature, pressure, and humidity.
+    Calculate the Gladstone-Dale constant based on temperature, pressure, and humidity.
 
     Parameters:
-    temperature (float): The temperature in degrees Celsius (°C).
-    pressure (float): The pressure in hectopascals (hPa).
-    humidity (float): The humidity as a percentage (%).
+    temperature (float): Temperature in degrees Celsius (°C).
+    pressure (float): Pressure in hectopascals (hPa).
+    humidity (float): Humidity as a percentage (%).
 
     Returns:
-    float: The calculated Gladstone-Dale constant (G).
+    tuple: (G, density) where
+        - G (float): The calculated Gladstone-Dale constant.
+        - density (float): The density of the atmasphere.
+
     """
 
-    # Calculate the density using the given pressure, temperature, and humidity
-    density_inf = density(pressure * units.hPa, temperature * units.degC, humidity * units.percent)
+    # Calculate the gas density based on the provided pressure, temperature, and humidity
+    density_air = density(pressure * units.hPa, temperature * units.degC, humidity * units.percent)
 
-    n_inf = 1.0003  # Refractive index of air
-    G = (n_inf - 1) / density_inf  # Gladstone-Dale Relation
-    return G
+    n_air = 1.0003  # Refractive index of air
+    G = (n_air - 1) / density_air  # Calculate the Gladstone-Dale constant based on the relation
+
+    return G,density_air
+
 
 def sinogram_maker_axialsymmetry(angle):
     """

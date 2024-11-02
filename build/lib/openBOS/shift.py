@@ -57,8 +57,6 @@ def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray):
     im_ref=im_ref.resize((im_ref.size[0],im_ref.size[1]*10))
     im_exp=im_exp.resize((im_exp.size[0],im_exp.size[1]*10))
 
-    print("resize",im_ref.shape,im_exp.shape)
-
     ar_ref=np.array(im_ref)
     ar_exp=np.array(im_exp)
 

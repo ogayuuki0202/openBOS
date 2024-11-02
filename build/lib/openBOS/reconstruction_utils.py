@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
-#from torch_radon import Radon
-openBOS/torch_radon/differentiable_functions.py
+from torch_radon import Radon
 import numpy as np
 
 

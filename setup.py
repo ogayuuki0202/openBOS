@@ -22,7 +22,7 @@ INSTALL_REQUIRES = [
     'scikit-image>=0.24.0',
     'tqdm >=4.0',
     'metpy >= 1.6',
-    "pillow >= 11.0",
+    "pillow >= 6.0",
     "torch-radon >= 1.0.0 ",
     "torch >=2.0",
 ]

@@ -51,7 +51,7 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
 
 def get_gladstone_dale_constant(temperature, pressure, humidity):
     """
-    Calculate the Gladstone-Dale constant based on temperature, pressure, and humidity.
+    Calculate the Gladstone-Dale constant based on temperature, pressure, and humidity without using metpy.
 
     Parameters:
     temperature (float): Temperature in degrees Celsius (°C).
@@ -61,17 +61,56 @@ def get_gladstone_dale_constant(temperature, pressure, humidity):
     Returns:
     tuple: (G, density) where
         - G (float): The calculated Gladstone-Dale constant.
-        - density (float): The density of the atmasphere.
-
+        - density (float): The density of the atmosphere.
     """
-
-    # Calculate the gas density based on the provided pressure, temperature, and humidity
-    density_air = density(pressure * units.hPa, temperature * units.degC, humidity * units.percent)
-
+    
+    # Constants
+    R_dry = 287.058  # Specific gas constant for dry air, J/(kg·K)
+    R_water_vapor = 461.495  # Specific gas constant for water vapor, J/(kg·K)
+    
+    # Convert input values
+    T_kelvin = temperature + 273.15  # Convert temperature to Kelvin
+    p_pa = pressure * 100  # Convert pressure to Pascals
+    e_saturation = 6.1078 * 10 ** ((7.5 * temperature) / (237.3 + temperature))  # Saturation vapor pressure in hPa
+    e_actual = e_saturation * (humidity / 100)  # Actual vapor pressure in hPa
+    p_dry = p_pa - e_actual * 100  # Partial pressure of dry air in Pa
+    
+    # Calculate densities
+    density_dry = p_dry / (R_dry * T_kelvin)  # Density of dry air
+    density_vapor = (e_actual * 100) / (R_water_vapor * T_kelvin)  # Density of water vapor
+    
+    # Total density of humid air
+    density_air = density_dry + density_vapor
+    
+    # Gladstone-Dale constant calculation
     n_air = 1.0003  # Refractive index of air
-    G = (n_air - 1) / density_air  # Calculate the Gladstone-Dale constant based on the relation
+    G = (n_air - 1) / density_air
 
-    return G,density_air
+    return G, density_air
+
+# def get_gladstone_dale_constant(temperature, pressure, humidity):
+#     """
+#     Calculate the Gladstone-Dale constant based on temperature, pressure, and humidity.
+
+#     Parameters:
+#     temperature (float): Temperature in degrees Celsius (°C).
+#     pressure (float): Pressure in hectopascals (hPa).
+#     humidity (float): Humidity as a percentage (%).
+
+#     Returns:
+#     tuple: (G, density) where
+#         - G (float): The calculated Gladstone-Dale constant.
+#         - density (float): The density of the atmasphere.
+
+#     """
+
+#     # Calculate the gas density based on the provided pressure, temperature, and humidity
+#     density_air = density(pressure * units.hPa, temperature * units.degC, humidity * units.percent)
+
+#     n_air = 1.0003  # Refractive index of air
+#     G = (n_air - 1) / density_air  # Calculate the Gladstone-Dale constant based on the relation
+
+#     return G,density_air
 
 
 def sinogram_maker_axialsymmetry(angle):

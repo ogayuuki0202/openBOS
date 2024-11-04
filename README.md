@@ -29,8 +29,8 @@ or clone using git
 
 ## Methods
 
-Please see our wiki below.
-[Wiki](https://github.com/ogayuuki0202/openBOS/wiki)
+Please see our Documentation below.
+[Documentation](https://ogayuuki0202.github.io/openBOS/)
 
 ## Getting Started
 Here's a quick example of using openBOS for flow visualization:

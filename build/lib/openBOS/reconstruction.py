@@ -1,8 +1,7 @@
 import numpy as np
 from tqdm import tqdm
-import torch      
-from .reconstruction_utils import ART_torch  
-from tqdm.contrib import tzip                              
+from tqdm.contrib import tzip      
+from skimage.transform import radon, iradon                        
 
 def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
     """
@@ -66,84 +65,70 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
 
     return density
 
-def ART(sinogram: np.ndarray, batch_size: int, device:str, eps: float,tolerance:float =1e-24,max_stable_iters:int=1000000):
+def ART(sinogram, mu, e, bpos=True):
     """
-    Perform Algebraic Reconstruction Technique (ART) on a sinogram using GPU.
-    
-    This function applies ART for tomographic reconstruction by iteratively adjusting 
-    predictions to reduce the residual between predictions and target sinogram values. 
-    The process runs on GPU if available for faster computation.
-    
-    Parameters:
-    sinogram (np.ndarray): Input sinogram with shape [N, Size, Angle].
-    batch_size (int): Number of samples per batch.If you use CPU for the processing,Batchsize=1 is recomennded.
-    device (str) : 'cuda' or 'cpu'
-    eps (float): Tolerance for stopping the iterative process based on residual.
+    Perform Algebraic Reconstruction Technique (ART) to reconstruct images from a sinogram.
 
-    tolerance (float): The difference threshold for loss change to consider convergence stable.
-    max_stable_iters (int): Maximum number of iterations with stable residuals allowed for convergence.
+    Parameters:
+    - sinogram (ndarray): The input sinogram, where each row corresponds to a projection at a specific angle.
+    - mu (float): The relaxation parameter that controls the update step size in the reconstruction process.
+    - e (float): The convergence threshold for the maximum absolute error in the reconstruction.
+    - bpos (bool): If True, enforces non-negative constraints on the pixel values in the reconstruction.
 
     Returns:
-    torch.Tensor: Reconstructed image tensor concatenated across all processed batches.
+    - x_list (list of ndarray): A list of reconstructed images, one for each projection set in the sinogram.
     """
+    
+    N = 1  # Initial grid size for reconstruction
+    ANG = 180  # Total rotation angle for projections
+    VIEW = sinogram[0].shape[0]  # Number of views (angles) in each projection
+    THETA = np.linspace(0, ANG, VIEW + 1)[:-1]  # Angles for radon transform
+    pbar = tqdm(total=sinogram[0].shape[0], desc="Initialization", unit="task")
 
+    # Find the optimal N that matches the projection dimensions
+    while True:
+        x = np.ones((N, N))  # Initialize a reconstruction image with ones
 
-    # Convert sinogram to a torch tensor and move it to the selected device
-    sinogram_tensor = torch.FloatTensor(sinogram).permute(0, 2, 1).to(device)
+        def A(x):
+            # Forward projection (Radon transform)
+            return radon(x, THETA, circle=False).astype(np.float32)
 
-    # Create data loaders for target and initial predictions
-    target_dataloader = torch.utils.data.DataLoader(sinogram_tensor, batch_size=batch_size, shuffle=False)
-    predict_dataloader = torch.utils.data.DataLoader(torch.zeros_like(sinogram_tensor), batch_size=batch_size, shuffle=False)
+        def AT(y):
+            # Backprojection (inverse Radon transform)
+            return iradon(y, THETA, circle=False, output_size=N).astype(np.float32) / (np.pi/2 * len(THETA))
+        
+        ATA = AT(A(np.ones_like(x)))  # ATA matrix for scaling
 
-    dataloaders_dict = {"target": target_dataloader, "predict": predict_dataloader}
+        # Check if the current grid size N produces projections of the correct shape
+        if A(x).shape[0] == sinogram[0].shape[0]:
+            break
 
-    # Initialize the ART model with the input sinogram
-    model = ART_torch(sinogram=sinogram)
+        # Adjust N in larger steps if the difference is significant, else by 1
+        if sinogram[0].shape[0] - A(x).shape[0] > 20:
+            N += 10
+        else:
+            N += 1
 
-    # Extract data loaders
-    predict_dataloader = dataloaders_dict["predict"]
-    target_dataloader = dataloaders_dict["target"]
+        # Update progress bar
+        pbar.n = A(x).shape[0]
+        pbar.refresh()
+    pbar.close()
 
-    processed_batches = []
+    loss = np.inf
+    x_list = []
 
-    # Convergence parameters
+    # Process each projection set in the sinogram
+    for i in tqdm(range(sinogram.shape[0]), desc='Process', leave=True):
+        b = sinogram[i]  # Current projection data
+        ATA = AT(A(np.ones_like(x)))  # Recalculate ATA for current x
+        loss = float('inf')  # Reset loss
 
-    prev_loss = float('inf')
+        # Iteratively update x until convergence
+        while np.max(np.abs(loss)) > e:
+            # Compute the update based on the difference between projection and reconstruction
+            loss = np.divide(AT(b - A(x)), ATA)
+            x = x + mu * loss
 
-    # Iterate through the data loader batches
-    for i, (predict_batch, target_batch) in enumerate(tzip(predict_dataloader, target_dataloader)):
-        # Move batches to the device
-        predict_batch = predict_batch.to(model.device)
-        target_batch = target_batch.to(model.device)
-        stable_count = 0  # Counter for stable iterations
+        x_list.append(x)  # Append the reconstructed image for the current projection
 
-        iter_count = 0
-        ATA = model.AT(model.A(torch.ones_like(predict_batch)))  # Precompute ATA for normalization
-        ave_loss = torch.inf  # Initialize average loss
-
-        # Initial loss calculation
-        loss = torch.divide(model.AT(target_batch - model.A(predict_batch)), ATA)
-        ave_loss = torch.max(torch.abs(loss)).item()
-
-        # ART Iterative Reconstruction Loop
-        while ave_loss > eps and stable_count < max_stable_iters:
-            predict_batch = predict_batch + loss  # Update prediction
-            ave_loss = torch.max(torch.abs(loss)).item()
-            print("\r", f'Iteration: {iter_count}, Residual: {ave_loss}, Stable Count: {stable_count}', end="")
-            iter_count += 1
-
-            # Recalculate loss
-            loss = torch.divide(model.AT(target_batch - model.A(predict_batch)), ATA)
-
-            # Check residual change to update stable count
-            if abs(ave_loss - prev_loss) < tolerance:
-                stable_count += 1
-            else:
-                stable_count = 0
-
-            prev_loss = ave_loss
-
-        processed_batches.append(predict_batch)
-
-    # Concatenate all processed batches along the batch dimension and return
-    return torch.cat(processed_batches, dim=0)
+    return x_list

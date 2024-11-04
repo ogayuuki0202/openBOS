@@ -5,27 +5,42 @@ from skimage.transform import radon, iradon
 
 def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
     """
-    Perform the Abel transform to convert angle values into density differences.
+    Perform the Abel transform to convert refractive angle values into density differences.
 
-    This function applies the Abel transform to a given array of angle values,
-    compensating for background movement, calculating distances from the center,
-    and integrating to obtain density differences using the Gladstone-Dale constant.
+    This function applies the Abel transform on a 2D array of refractive angles. It compensates
+    for background movement by subtracting the mean value at a reference x-coordinate, calculates
+    distances from the center axis, and integrates to derive density differences using the
+    Gladstone-Dale constant.
 
-    Parameters:
+    Parameters
     ----------
     angle : np.ndarray
-        The input array of angle values for transformation.
+        A 2D numpy array representing refractive angles for each pixel.
     center : float
-        The center position for the transformation, defining the region of interest.
+        The index along the y-axis corresponding to the central axis of the transform.
     ref_x : float
-        The x-coordinate used to offset the background movement.
+        A reference x-coordinate to compute and offset background movement.
     G : float
-        The Gladstone-Dale constant used to convert the result to density differences.
+        The Gladstone-Dale constant, used to convert the computed refractive index differences
+        to density differences.
 
-    Returns:
+    Returns
     -------
     np.ndarray
-        The resulting array of density differences obtained from the Abel transform.
+        A 1D array of density differences derived from the Abel transform.
+
+    Notes
+    -----
+    This function calculates density differences through an integral-based approach. The refractive
+    angle image is rotated to align with the axis of symmetry, and values are integrated from the
+    center outwards, adjusting for axial symmetry.
+
+    Examples
+    --------
+    >>> angle_image = np.random.rand(200, 300)  # Simulated refractive angle image
+    >>> density_differences = abel_transform(angle_image, center=150, ref_x=50, G=0.0001)
+    >>> print(density_differences.shape)
+    (150,)
     """
     
     # Offset the angle values by subtracting the mean value at the reference x-coordinate
@@ -69,14 +84,39 @@ def ART(sinogram, mu, e, bpos=True):
     """
     Perform Algebraic Reconstruction Technique (ART) to reconstruct images from a sinogram.
 
-    Parameters:
-    - sinogram (ndarray): The input sinogram, where each row corresponds to a projection at a specific angle.
-    - mu (float): The relaxation parameter that controls the update step size in the reconstruction process.
-    - e (float): The convergence threshold for the maximum absolute error in the reconstruction.
-    - bpos (bool): If True, enforces non-negative constraints on the pixel values in the reconstruction.
+    The ART method iteratively updates pixel values to minimize the error between projections
+    and the input sinogram, facilitating accurate image reconstruction from projections.
 
-    Returns:
-    - x_list (list of ndarray): A list of reconstructed images, one for each projection set in the sinogram.
+    Parameters
+    ----------
+    sinogram : np.ndarray
+        A 2D or 3D numpy array representing the sinogram. Each row corresponds to a projection
+        at a specific angle.
+    mu : float
+        The relaxation parameter controlling the update step size during the iterative process.
+    e : float
+        The convergence threshold for the maximum absolute error in the reconstruction.
+    bpos : bool, optional
+        If True, enforces non-negative pixel values in the reconstruction, by default True.
+
+    Returns
+    -------
+    list of np.ndarray
+        A list of reconstructed 2D arrays, each corresponding to a projection set in the input sinogram.
+
+    Notes
+    -----
+    - The function dynamically adjusts the grid size `N` until it matches the shape of the sinogram projections.
+    - The `radon` and `iradon` functions from `skimage.transform` are used to perform forward and backward
+      projections, respectively.
+    - The method stops when the maximum absolute error between successive updates falls below `e`.
+
+    Examples
+    --------
+    >>> sinogram = np.random.rand(180, 128)  # Example sinogram with 180 projections of length 128
+    >>> reconstructed_images = ART(sinogram, mu=0.1, e=1e-6)
+    >>> print(len(reconstructed_images))
+    180
     """
     
     N = 1  # Initial grid size for reconstruction

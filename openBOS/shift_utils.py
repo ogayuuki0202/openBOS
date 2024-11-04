@@ -1,35 +1,35 @@
 import numpy as np
 import pandas as pd
 
-def biner_thresh(ar_in: np.ndarray, thresh: int) -> np.ndarray:
+def _biner_thresh(ar_in: np.ndarray, thresh: int) -> np.ndarray:
     """
     Binarize an array based on a threshold value.
 
-    Parameters:
+    Parameters
     ----------
     ar_in : np.ndarray
         Input array to be binarized.
     thresh : int
         Threshold value for binarization.
 
-    Returns:
+    Returns
     -------
     np.ndarray
-        Binarized array where values above the threshold are True.
+        Binarized array where values above the threshold are `True` and values below are `False`.
     """
     ar_bin = ar_in > thresh
     return ar_bin
 
-def bin_indexer(ar_in: np.ndarray) -> tuple:
+def _bin_indexer(ar_in: np.ndarray) -> tuple:
     """
     Detect color boundary coordinates in a binarized image by finding gradient edges.
 
-    Parameters:
+    Parameters
     ----------
     ar_in : np.ndarray
         Input binarized image array.
 
-    Returns:
+    Returns
     -------
     tuple
         Arrays containing the y-coordinates for the detected upper and lower boundaries of stripes.
@@ -87,35 +87,11 @@ def bin_indexer(ar_in: np.ndarray) -> tuple:
     
     return u_index_2, d_index_2
 
-def noize_reducer(ar_in: np.ndarray) -> np.ndarray:
-    """
-    Remove noise by filtering out intervals between stripes below 70% of the mean interval.
-
-    Parameters:
-    ----------
-    ar_in : np.ndarray
-        Array containing stripe intervals.
-
-    Returns:
-    -------
-    np.ndarray
-        Filtered array with noisy intervals removed.
-    """
-    test = np.delete(ar_in, 0, 0) - np.delete(ar_in, ar_in.shape[0] - 1, 0)
-    test2 = np.insert(test, test.shape[0], 0, axis=0) > np.nanmean(test) * 0.7
-    
-    ar_out = np.zeros([1000, ar_in.shape[1]])
-    for x in range(ar_in.shape[1]):
-        ar_loop = ar_in[test2[:, x], x]
-        ar_out[:, x] = np.concatenate([ar_loop, np.full(1000 - ar_loop.shape[0], np.nan)])
-    
-    return ar_out
-
-def noize_reducer_2(ar_ref: np.ndarray, ar_exp: np.ndarray, diff_thresh: int) -> tuple:
+def _noize_reducer_2(ar_ref: np.ndarray, ar_exp: np.ndarray, diff_thresh: int) -> tuple:
     """
     Remove noise by aligning arrays based on a displacement threshold.
 
-    Parameters:
+    Parameters
     ----------
     ar_ref : np.ndarray
         Reference array.
@@ -124,7 +100,7 @@ def noize_reducer_2(ar_ref: np.ndarray, ar_exp: np.ndarray, diff_thresh: int) ->
     diff_thresh : int
         Threshold for detecting displacement.
 
-    Returns:
+    Returns
     -------
     tuple
         Arrays with noise filtered based on the displacement threshold.
@@ -149,18 +125,18 @@ def noize_reducer_2(ar_ref: np.ndarray, ar_exp: np.ndarray, diff_thresh: int) ->
     
     return ar_ref, ar_exp
 
-def mixing(u_ar: np.ndarray, d_ar: np.ndarray) -> np.ndarray:
+def _mixing(u_ar: np.ndarray, d_ar: np.ndarray) -> np.ndarray:
     """
     Calculate the center positions between upper and lower boundaries.
 
-    Parameters:
+    Parameters
     ----------
     u_ar : np.ndarray
         Array of upper boundary coordinates.
     d_ar : np.ndarray
         Array of lower boundary coordinates.
 
-    Returns:
+    Returns
     -------
     np.ndarray
         Array with center positions between boundaries.
@@ -174,18 +150,18 @@ def mixing(u_ar: np.ndarray, d_ar: np.ndarray) -> np.ndarray:
     
     return ar
 
-def complementer(ref_ar: np.ndarray, diff_ar: np.ndarray) -> np.ndarray:
+def _complementer(ref_ar: np.ndarray, diff_ar: np.ndarray) -> np.ndarray:
     """
     Rearrange displacement data to correct positions and interpolate gaps.
 
-    Parameters:
+    Parameters
     ----------
     ref_ar : np.ndarray
         Reference array containing stripe positions.
     diff_ar : np.ndarray
         Array of displacement values.
 
-    Returns:
+    Returns
     -------
     np.ndarray
         Compensated displacement array with interpolated gaps.
@@ -207,16 +183,21 @@ def complementer(ref_ar: np.ndarray, diff_ar: np.ndarray) -> np.ndarray:
     
     return diff_comp
 
-def stretch_image_vertically(image: np.ndarray, scale_factor: int) -> np.ndarray:
+def _stretch_image_vertically(image: np.ndarray, scale_factor: int) -> np.ndarray:
     """
     Stretch a grayscale image vertically by a given scale factor.
 
-    Parameters:
-    image (np.ndarray): Input grayscale image as a 2D numpy array.
-    scale_factor (int): The factor by which to stretch the image vertically.
+    Parameters
+    ----------
+    image : np.ndarray
+        Input grayscale image as a 2D numpy array.
+    scale_factor : int
+        The factor by which to stretch the image vertically.
 
-    Returns:
-    np.ndarray: Vertically stretched image.
+    Returns
+    -------
+    np.ndarray
+        Vertically stretched image.
     """
     # Verify that the input image is 2D
     if image.ndim != 2:
@@ -227,20 +208,16 @@ def stretch_image_vertically(image: np.ndarray, scale_factor: int) -> np.ndarray
 
     return stretched_image
 
-def cycle(ref_array: np.ndarray):
+def _cycle(ref_array: np.ndarray):
     """
     Calculate the cycle length of stripes in a reference image.
 
-    This function processes the input reference image by stretching it vertically,
-    binarizing it, detecting the upper and lower boundaries of stripes, and then
-    calculating the average distance between these boundaries to determine the cycle length.
-
-    Parameters:
+    Parameters
     ----------
     ref_array : np.ndarray
         The reference image to be analyzed, provided as a 2D numpy array.
 
-    Returns:
+    Returns
     -------
     float
         The calculated cycle length based on the detected boundaries in the reference image.
@@ -253,13 +230,13 @@ def cycle(ref_array: np.ndarray):
     ar_ref = np.array(im_ref)
     
     # Binarize the stretched image using a threshold of 128
-    bin_ref = biner_thresh(ar_ref, 128)
+    bin_ref = _biner_thresh(ar_ref, 128)
     
     # Detect upper and lower boundaries in the binarized image
-    ref_u, ref_d = bin_indexer(bin_ref)
+    ref_u, ref_d = _bin_indexer(bin_ref)
     
     # Mix the upper and lower boundary coordinates to find the midpoints
-    ref = mixing(ref_u, ref_d)
+    ref = _mixing(ref_u, ref_d)
     
     # Calculate the intervals between midpoints by finding differences
     ref_interbal = np.delete(ref, 0, 0) - np.delete(ref, ref.shape[0] - 1, 0)

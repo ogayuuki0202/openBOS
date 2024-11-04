@@ -26,7 +26,7 @@ INSTALL_REQUIRES = [
 ]
 
 EXTRAS_REQUIRE = {
-    "GPU":["torch-radon >= 1.0.0 ","torch >=2.0"]   
+    
 }
 
 PACKAGES = [

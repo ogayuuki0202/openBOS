@@ -4,7 +4,7 @@ openBOS is a library developed to provide open access to various methods of the 
 
 ## Key Features
 - Short, concise code for visualization, 3D reconstruction, and quantification
-- GPU parallel processing is also available
+- GPU parallel processing is also [available](https://github.com/ogayuuki0202/openBOS-GPU)
 
 ## Warning
 
@@ -13,24 +13,6 @@ it still might have some bugs and the API may change. However, testing and contr
 is very welcome, especially if you can contribute with new algorithms and features.
 
 ## Installing
-### 1. Install PyTorch
-Please install Pytorch 2.x .
-Make sure that CUDA  is available on your PC.
-<https://pytorch.org/get-started/locally/>
-### 2. Install torch_radon
-Please install torch_radon　<https://torch-radon.readthedocs.io/en/latest/getting_started/install.html>
-
-    git clone https://github.com/matteo-ronchetti/torch-radon.git
-    cd torch-radon
-    python setup.py install
-or
-
-    docker pull matteoronchetti/torch-radon
-or if you are running Linux 
-
-    wget -qO- https://raw.githubusercontent.com/matteo-ronchetti/torch-radon/master/auto_install.py  | python -
-
-### 3. Install openBOS
 Use PyPI: <https://pypi.python.org/pypi/openBOS>:
 
     pip install openBOS 

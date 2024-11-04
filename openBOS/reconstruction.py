@@ -29,7 +29,7 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
     """
     
     # Offset the angle values by subtracting the mean value at the reference x-coordinate
-    angle = angle - np.mean(angle[0:round(angle.shape[0]/20), ref_x])
+    angle = angle - np.mean(angle[0])
     
     # Remove values below the center since they are not used in the calculation
     angle = angle[0:center]

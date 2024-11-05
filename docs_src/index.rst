@@ -1,5 +1,5 @@
 .. openBOS documentation master file, created by
-   sphinx-quickstart on Mon Nov  4 21:27:39 2024.
+   sphinx-quickstart on Tue Nov  5 09:18:21 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -15,6 +15,5 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
-   modules.rst
-   setup.rst
-
+   modules
+   openBOS

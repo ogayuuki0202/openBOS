@@ -6,21 +6,19 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>openBOS package &mdash; openBOS 0.0.7 documentation</title>
+  <title>openBOS package &mdash; openBOS 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=bbaf98b3"></script>
+      <script src="_static/documentation_options.js?v=056c92e6"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="setup module" href="setup.html" />
-    <link rel="prev" title="openBOS" href="modules.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,46 +40,41 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">openBOS</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">openBOS package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#openbos-culculate-refractiveindex-module">openBOS.culculate_refractiveindex module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-openBOS.reconstruction">openBOS.reconstruction module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.reconstruction.abel_transform"><code class="docutils literal notranslate"><span class="pre">abel_transform()</span></code></a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">openBOS package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-openBOS.culculate_refractiveindex">openBOS.culculate_refractiveindex module</a><ul>
+<li><a class="reference internal" href="#openBOS.culculate_refractiveindex.SOR_2D"><code class="docutils literal notranslate"><span class="pre">SOR_2D()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-openBOS.reconstruction_utils">openBOS.reconstruction_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-openBOS.shift">openBOS.shift module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift.SP_BOS"><code class="docutils literal notranslate"><span class="pre">SP_BOS()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift.SSIM"><code class="docutils literal notranslate"><span class="pre">SSIM()</span></code></a></li>
+<li><a class="reference internal" href="#module-openBOS.reconstruction">openBOS.reconstruction module</a><ul>
+<li><a class="reference internal" href="#openBOS.reconstruction.ART"><code class="docutils literal notranslate"><span class="pre">ART()</span></code></a></li>
+<li><a class="reference internal" href="#openBOS.reconstruction.abel_transform"><code class="docutils literal notranslate"><span class="pre">abel_transform()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-openBOS.shift_utils">openBOS.shift_utils module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.bin_indexer"><code class="docutils literal notranslate"><span class="pre">bin_indexer()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.biner_thresh"><code class="docutils literal notranslate"><span class="pre">biner_thresh()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.complementer"><code class="docutils literal notranslate"><span class="pre">complementer()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.cycle"><code class="docutils literal notranslate"><span class="pre">cycle()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.mixing"><code class="docutils literal notranslate"><span class="pre">mixing()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.noize_reducer"><code class="docutils literal notranslate"><span class="pre">noize_reducer()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.noize_reducer_2"><code class="docutils literal notranslate"><span class="pre">noize_reducer_2()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.shift_utils.stretch_image_vertically"><code class="docutils literal notranslate"><span class="pre">stretch_image_vertically()</span></code></a></li>
+<li><a class="reference internal" href="#module-openBOS.reconstruction_utils">openBOS.reconstruction_utils module</a><ul>
+<li><a class="reference internal" href="#openBOS.reconstruction_utils.sinogram_maker_axialsymmetry"><code class="docutils literal notranslate"><span class="pre">sinogram_maker_axialsymmetry()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-openBOS.utils">openBOS.utils module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.utils.get_G"><code class="docutils literal notranslate"><span class="pre">get_G()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#openBOS.utils.shift2angle"><code class="docutils literal notranslate"><span class="pre">shift2angle()</span></code></a></li>
+<li><a class="reference internal" href="#module-openBOS.shift">openBOS.shift module</a><ul>
+<li><a class="reference internal" href="#openBOS.shift.SP_BOS"><code class="docutils literal notranslate"><span class="pre">SP_BOS()</span></code></a></li>
+<li><a class="reference internal" href="#openBOS.shift.SSIM"><code class="docutils literal notranslate"><span class="pre">SSIM()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-openBOS">Module contents</a></li>
+<li><a class="reference internal" href="#module-openBOS.shift_utils">openBOS.shift_utils module</a></li>
+<li><a class="reference internal" href="#module-openBOS.utils">openBOS.utils module</a><ul>
+<li><a class="reference internal" href="#openBOS.utils.compute_laplacian_in_chunks_2D"><code class="docutils literal notranslate"><span class="pre">compute_laplacian_in_chunks_2D()</span></code></a></li>
+<li><a class="reference internal" href="#openBOS.utils.compute_laplacian_in_chunks_3D"><code class="docutils literal notranslate"><span class="pre">compute_laplacian_in_chunks_3D()</span></code></a></li>
+<li><a class="reference internal" href="#openBOS.utils.get_gladstone_dale_constant"><code class="docutils literal notranslate"><span class="pre">get_gladstone_dale_constant()</span></code></a></li>
+<li><a class="reference internal" href="#openBOS.utils.shift2angle"><code class="docutils literal notranslate"><span class="pre">shift2angle()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-openBOS">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="setup.html">setup module</a></li>
-</ul>
-
+</div>
         </div>
       </div>
     </nav>
@@ -96,7 +89,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">openBOS</a></li>
       <li class="breadcrumb-item active">openBOS package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/openBOS.rst.txt" rel="nofollow"> View page source</a>
@@ -112,302 +104,341 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="openbos-culculate-refractiveindex-module">
-<h2>openBOS.culculate_refractiveindex module<a class="headerlink" href="#openbos-culculate-refractiveindex-module" title="Link to this heading"></a></h2>
+<section id="module-openBOS.culculate_refractiveindex">
+<span id="openbos-culculate-refractiveindex-module"></span><h2>openBOS.culculate_refractiveindex module<a class="headerlink" href="#module-openBOS.culculate_refractiveindex" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="openBOS.culculate_refractiveindex.SOR_2D">
+<span class="sig-prename descclassname"><span class="pre">openBOS.culculate_refractiveindex.</span></span><span class="sig-name descname"><span class="pre">SOR_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array_laplacian</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_SOR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_stable_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.culculate_refractiveindex.SOR_2D" title="Link to this definition"></a></dt>
+<dd><p>Performs the Successive Over-Relaxation (SOR) method on a 2D Laplacian array to solve for steady-state solutions
+within each slice of the array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array_laplacian</strong> (<em>np.ndarray</em>) – A 3D numpy array where each slice represents a 2D Laplacian grid to be solved.</p></li>
+<li><p><strong>omega_SOR</strong> (<em>float</em>) – The relaxation factor for the SOR method. Values between 1 and 2 can speed up convergence.</p></li>
+<li><p><strong>e</strong> (<em>float</em>) – The convergence tolerance threshold for each slice. Iterations stop once the change (<cite>delta</cite>)
+falls below this threshold.</p></li>
+<li><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – The tolerance level to determine stability in convergence. Defaults to 1e-24.</p></li>
+<li><p><strong>max_stable_iters</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of stable iterations allowed per slice before termination, regardless of convergence.
+Defaults to 1000000.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 3D numpy array containing the steady-state solution <cite>u</cite> for each 2D slice in <cite>array_laplacian</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The SOR method updates each element in the <cite>u</cite> array by considering its neighbors and applying the
+relaxation factor <cite>omega_SOR</cite>.</p></li>
+<li><p>Boundaries are fixed to zero for each slice, enforcing Dirichlet boundary conditions.</p></li>
+<li><p>Convergence for each slice stops either when <cite>delta</cite> is less than <cite>e</cite> or after a stable count of
+iterations (determined by <cite>tolerance</cite> and <cite>max_stable_iters</cite>) has been reached.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">laplacian</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 10 slices of 100x100 grids</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solution</span> <span class="o">=</span> <span class="n">SOR_2D</span><span class="p">(</span><span class="n">laplacian</span><span class="p">,</span> <span class="n">omega_SOR</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(10, 100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 <section id="module-openBOS.reconstruction">
 <span id="openbos-reconstruction-module"></span><h2>openBOS.reconstruction module<a class="headerlink" href="#module-openBOS.reconstruction" title="Link to this heading"></a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="openBOS.reconstruction.ART">
+<span class="sig-prename descclassname"><span class="pre">openBOS.reconstruction.</span></span><span class="sig-name descname"><span class="pre">ART</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sinogram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.reconstruction.ART" title="Link to this definition"></a></dt>
+<dd><p>Perform Algebraic Reconstruction Technique (ART) to reconstruct images from a sinogram.</p>
+<p>The ART method iteratively updates pixel values to minimize the error between projections
+and the input sinogram, facilitating accurate image reconstruction from projections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sinogram</strong> (<em>np.ndarray</em>) – A 2D or 3D numpy array representing the sinogram. Each row corresponds to a projection
+at a specific angle.</p></li>
+<li><p><strong>mu</strong> (<em>float</em>) – The relaxation parameter controlling the update step size during the iterative process.</p></li>
+<li><p><strong>e</strong> (<em>float</em>) – The convergence threshold for the maximum absolute error in the reconstruction.</p></li>
+<li><p><strong>bpos</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, enforces non-negative pixel values in the reconstruction, by default True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of reconstructed 2D arrays, each corresponding to a projection set in the input sinogram.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The function dynamically adjusts the grid size <cite>N</cite> until it matches the shape of the sinogram projections.</p></li>
+<li><p>The <cite>radon</cite> and <cite>iradon</cite> functions from <cite>skimage.transform</cite> are used to perform forward and backward
+projections, respectively.</p></li>
+<li><p>The method stops when the maximum absolute error between successive updates falls below <cite>e</cite>.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sinogram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>  <span class="c1"># Example sinogram with 180 projections of length 128</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_images</span> <span class="o">=</span> <span class="n">ART</span><span class="p">(</span><span class="n">sinogram</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reconstructed_images</span><span class="p">))</span>
+<span class="go">180</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="openBOS.reconstruction.abel_transform">
 <span class="sig-prename descclassname"><span class="pre">openBOS.reconstruction.</span></span><span class="sig-name descname"><span class="pre">abel_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.reconstruction.abel_transform" title="Link to this definition"></a></dt>
-<dd><p>Perform the Abel transform to convert angle values into density differences.</p>
-<p>This function applies the Abel transform to a given array of angle values,
-compensating for background movement, calculating distances from the center,
-and integrating to obtain density differences using the Gladstone-Dale constant.</p>
-<section id="parameters">
-<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>angle<span class="classifier">np.ndarray</span></dt><dd><p>The input array of angle values for transformation.</p>
+<dd><p>Perform the Abel transform to convert refractive angle values into density differences.</p>
+<p>This function applies the Abel transform on a 2D array of refractive angles. It compensates
+for background movement by subtracting the mean value at a reference x-coordinate, calculates
+distances from the center axis, and integrates to derive density differences using the
+Gladstone-Dale constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle</strong> (<em>np.ndarray</em>) – A 2D numpy array representing refractive angles for each pixel.</p></li>
+<li><p><strong>center</strong> (<em>float</em>) – The index along the y-axis corresponding to the central axis of the transform.</p></li>
+<li><p><strong>ref_x</strong> (<em>float</em>) – A reference x-coordinate to compute and offset background movement.</p></li>
+<li><p><strong>G</strong> (<em>float</em>) – The Gladstone-Dale constant, used to convert the computed refractive index differences
+to density differences.</p></li>
+</ul>
 </dd>
-<dt>center<span class="classifier">float</span></dt><dd><p>The center position for the transformation, defining the region of interest.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1D array of density differences derived from the Abel transform.</p>
 </dd>
-<dt>ref_x<span class="classifier">float</span></dt><dd><p>The x-coordinate used to offset the background movement.</p>
-</dd>
-<dt>G<span class="classifier">float</span></dt><dd><p>The Gladstone-Dale constant used to convert the result to density differences.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
-</section>
-<section id="returns">
-<h3>Returns:<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>np.ndarray</dt><dd><p>The resulting array of density differences obtained from the Abel transform.</p>
-</dd>
-</dl>
-</section>
+<p class="rubric">Notes</p>
+<p>This function calculates density differences through an integral-based approach. The refractive
+angle image is rotated to align with the axis of symmetry, and values are integrated from the
+center outwards, adjusting for axial symmetry.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">angle_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>  <span class="c1"># Simulated refractive angle image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">density_differences</span> <span class="o">=</span> <span class="n">abel_transform</span><span class="p">(</span><span class="n">angle_image</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">ref_x</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">density_differences</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(150,)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
 <section id="module-openBOS.reconstruction_utils">
 <span id="openbos-reconstruction-utils-module"></span><h2>openBOS.reconstruction_utils module<a class="headerlink" href="#module-openBOS.reconstruction_utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="openBOS.reconstruction_utils.sinogram_maker_axialsymmetry">
+<span class="sig-prename descclassname"><span class="pre">openBOS.reconstruction_utils.</span></span><span class="sig-name descname"><span class="pre">sinogram_maker_axialsymmetry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.reconstruction_utils.sinogram_maker_axialsymmetry" title="Link to this definition"></a></dt>
+<dd><p>Generates a sinogram with axial symmetry from a single 2D refractive angle image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle</strong> (<em>np.ndarray</em>) – A 2D numpy array representing the refractive angle image. Each row in this array
+is broadcast across the height dimension to simulate an axially symmetric sinogram.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 3D numpy array representing the sinogram with axial symmetry. Each slice along
+the first dimension corresponds to a projection at a different angle, where each
+projection is a symmetric repetition of the refractive angle row values across
+the height and width dimensions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function assumes axial symmetry for the generated sinogram by replicating each row
+of the input angle image across both dimensions (height and width) for each slice in
+the 3D sinogram. The input image is first rotated by 90 degrees for alignment.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">angle_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># A 100x200 refractive angle image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sinogram</span> <span class="o">=</span> <span class="n">sinogram_maker_axialsymmetry</span><span class="p">(</span><span class="n">angle_image</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sinogram</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(200, 200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 <section id="module-openBOS.shift">
 <span id="openbos-shift-module"></span><h2>openBOS.shift module<a class="headerlink" href="#module-openBOS.shift" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="openBOS.shift.SP_BOS">
 <span class="sig-prename descclassname"><span class="pre">openBOS.shift.</span></span><span class="sig-name descname"><span class="pre">SP_BOS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.shift.SP_BOS" title="Link to this definition"></a></dt>
-<dd><p>Calculate the displacement of stripes in experimental images using the BOS (Background Oriented Schlieren) method.</p>
-<section id="id1">
-<h3>Parameters:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ref_array<span class="classifier">np.ndarray</span></dt><dd><p>The reference grayscale image array.</p>
+<dd><p>Calculate the displacement map of stripe patterns in experimental images using the Background Oriented Schlieren (BOS) method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ref_array</strong> (<em>np.ndarray</em>) – The reference grayscale image array.</p></li>
+<li><p><strong>exp_array</strong> (<em>np.ndarray</em>) – The experimental grayscale image array.</p></li>
+</ul>
 </dd>
-<dt>exp_array<span class="classifier">np.ndarray</span></dt><dd><p>The experimental grayscale image array.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The displacement map with background movement compensated. Each value represents the relative movement
+of stripes between the reference and experimental images, with noise and background displacements removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
-</section>
-<section id="id2">
-<h3>Returns:<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>np.ndarray</dt><dd><p>The compensated displacement map showing the relative movement of stripes, with the overall background movement removed.</p>
-</dd>
-</dl>
-</section>
-<section id="notes">
-<h3>Notes:<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
-<p>The function processes the reference and experimental images by:
-- Binarizing the images
-- Detecting stripe boundaries
-- Removing noise from large displacements
-- Calculating displacement between stripe centers in the reference and experimental images
-- Compensating for overall background movement</p>
-</section>
+<p class="rubric">Notes</p>
+<p>The method follows these steps:
+1. Vertically stretches both reference and experimental images by a factor of 10.
+2. Binarizes the stretched images to detect stripe boundaries.
+3. Identifies upper and lower stripe boundaries and calculates stripe centers for both images.
+4. Filters noise by removing large displacement values.
+5. Computes displacement between stripe centers.
+6. Compensates for background movement by normalizing the displacement map.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="openBOS.shift.SSIM">
 <span class="sig-prename descclassname"><span class="pre">openBOS.shift.</span></span><span class="sig-name descname"><span class="pre">SSIM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.shift.SSIM" title="Link to this definition"></a></dt>
-<dd><p>Compute the inverted structural similarity matrix (SSM) between two grayscale images.</p>
-<section id="id3">
-<h3>Parameters:<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ref_array<span class="classifier">np.ndarray</span></dt><dd><p>The reference grayscale image array.</p>
+<dd><p>Compute the inverted Structural Similarity Index (SSIM) difference matrix between two grayscale images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ref_array</strong> (<em>np.ndarray</em>) – The reference grayscale image array.</p></li>
+<li><p><strong>exp_array</strong> (<em>np.ndarray</em>) – The experimental grayscale image array.</p></li>
+</ul>
 </dd>
-<dt>exp_array<span class="classifier">np.ndarray</span></dt><dd><p>The experimental grayscale image array.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The inverted SSIM difference matrix, where higher values indicate greater dissimilarity between the two images.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
-</section>
-<section id="id4">
-<h3>Returns:<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>np.ndarray</dt><dd><p>The inverted difference matrix showing dissimilarity between the two images.</p>
-</dd>
-</dl>
-</section>
 </dd></dl>
 
 </section>
 <section id="module-openBOS.shift_utils">
 <span id="openbos-shift-utils-module"></span><h2>openBOS.shift_utils module<a class="headerlink" href="#module-openBOS.shift_utils" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.bin_indexer">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">bin_indexer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#openBOS.shift_utils.bin_indexer" title="Link to this definition"></a></dt>
-<dd><p>Detect color boundary coordinates in a binarized image by finding gradient edges.</p>
-<section id="id5">
-<h3>Parameters:<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ar_in<span class="classifier">np.ndarray</span></dt><dd><p>Input binarized image array.</p>
-</dd>
-</dl>
-</section>
-<section id="id6">
-<h3>Returns:<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>tuple</dt><dd><p>Arrays containing the y-coordinates for the detected upper and lower boundaries of stripes.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.biner_thresh">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">biner_thresh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#openBOS.shift_utils.biner_thresh" title="Link to this definition"></a></dt>
-<dd><p>Binarize an array based on a threshold value.</p>
-<section id="id7">
-<h3>Parameters:<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ar_in<span class="classifier">np.ndarray</span></dt><dd><p>Input array to be binarized.</p>
-</dd>
-<dt>thresh<span class="classifier">int</span></dt><dd><p>Threshold value for binarization.</p>
-</dd>
-</dl>
-</section>
-<section id="id8">
-<h3>Returns:<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>np.ndarray</dt><dd><p>Binarized array where values above the threshold are True.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.complementer">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">complementer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_ar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_ar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#openBOS.shift_utils.complementer" title="Link to this definition"></a></dt>
-<dd><p>Rearrange displacement data to correct positions and interpolate gaps.</p>
-<section id="id9">
-<h3>Parameters:<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ref_ar<span class="classifier">np.ndarray</span></dt><dd><p>Reference array containing stripe positions.</p>
-</dd>
-<dt>diff_ar<span class="classifier">np.ndarray</span></dt><dd><p>Array of displacement values.</p>
-</dd>
-</dl>
-</section>
-<section id="id10">
-<h3>Returns:<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>np.ndarray</dt><dd><p>Compensated displacement array with interpolated gaps.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.cycle">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.shift_utils.cycle" title="Link to this definition"></a></dt>
-<dd><p>Calculate the cycle length of stripes in a reference image.</p>
-<p>This function processes the input reference image by stretching it vertically,
-binarizing it, detecting the upper and lower boundaries of stripes, and then
-calculating the average distance between these boundaries to determine the cycle length.</p>
-<section id="id11">
-<h3>Parameters:<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ref_array<span class="classifier">np.ndarray</span></dt><dd><p>The reference image to be analyzed, provided as a 2D numpy array.</p>
-</dd>
-</dl>
-</section>
-<section id="id12">
-<h3>Returns:<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>float</dt><dd><p>The calculated cycle length based on the detected boundaries in the reference image.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.mixing">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">mixing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u_ar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_ar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#openBOS.shift_utils.mixing" title="Link to this definition"></a></dt>
-<dd><p>Calculate the center positions between upper and lower boundaries.</p>
-<section id="id13">
-<h3>Parameters:<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>u_ar<span class="classifier">np.ndarray</span></dt><dd><p>Array of upper boundary coordinates.</p>
-</dd>
-<dt>d_ar<span class="classifier">np.ndarray</span></dt><dd><p>Array of lower boundary coordinates.</p>
-</dd>
-</dl>
-</section>
-<section id="id14">
-<h3>Returns:<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>np.ndarray</dt><dd><p>Array with center positions between boundaries.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.noize_reducer">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">noize_reducer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#openBOS.shift_utils.noize_reducer" title="Link to this definition"></a></dt>
-<dd><p>Remove noise by filtering out intervals between stripes below 70% of the mean interval.</p>
-<section id="id15">
-<h3>Parameters:<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ar_in<span class="classifier">np.ndarray</span></dt><dd><p>Array containing stripe intervals.</p>
-</dd>
-</dl>
-</section>
-<section id="id16">
-<h3>Returns:<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>np.ndarray</dt><dd><p>Filtered array with noisy intervals removed.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.noize_reducer_2">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">noize_reducer_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar_ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_exp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_thresh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#openBOS.shift_utils.noize_reducer_2" title="Link to this definition"></a></dt>
-<dd><p>Remove noise by aligning arrays based on a displacement threshold.</p>
-<section id="id17">
-<h3>Parameters:<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>ar_ref<span class="classifier">np.ndarray</span></dt><dd><p>Reference array.</p>
-</dd>
-<dt>ar_exp<span class="classifier">np.ndarray</span></dt><dd><p>Experimental array.</p>
-</dd>
-<dt>diff_thresh<span class="classifier">int</span></dt><dd><p>Threshold for detecting displacement.</p>
-</dd>
-</dl>
-</section>
-<section id="id18">
-<h3>Returns:<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>tuple</dt><dd><p>Arrays with noise filtered based on the displacement threshold.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="openBOS.shift_utils.stretch_image_vertically">
-<span class="sig-prename descclassname"><span class="pre">openBOS.shift_utils.</span></span><span class="sig-name descname"><span class="pre">stretch_image_vertically</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#openBOS.shift_utils.stretch_image_vertically" title="Link to this definition"></a></dt>
-<dd><p>Stretch a grayscale image vertically by a given scale factor.</p>
-<p>Parameters:
-image (np.ndarray): Input grayscale image as a 2D numpy array.
-scale_factor (int): The factor by which to stretch the image vertically.</p>
-<p>Returns:
-np.ndarray: Vertically stretched image.</p>
-</dd></dl>
-
 </section>
 <section id="module-openBOS.utils">
 <span id="openbos-utils-module"></span><h2>openBOS.utils module<a class="headerlink" href="#module-openBOS.utils" title="Link to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="openBOS.utils.get_G">
-<span class="sig-prename descclassname"><span class="pre">openBOS.utils.</span></span><span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">humidity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.utils.get_G" title="Link to this definition"></a></dt>
-<dd><p>Calculate the Gladstone constant based on temperature, pressure, and humidity.</p>
-<p>Parameters:
-temperature (float): The temperature in degrees Celsius (°C).
-pressure (float): The pressure in hectopascals (hPa).
-humidity (float): The humidity as a percentage (%).</p>
-<p>Returns:
-float: The calculated Gladstone-Dale constant (G).</p>
+<dt class="sig sig-object py" id="openBOS.utils.compute_laplacian_in_chunks_2D">
+<span class="sig-prename descclassname"><span class="pre">openBOS.utils.</span></span><span class="sig-name descname"><span class="pre">compute_laplacian_in_chunks_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#openBOS.utils.compute_laplacian_in_chunks_2D" title="Link to this definition"></a></dt>
+<dd><p>Computes the Laplacian of an input 2D tensor in smaller chunks, allowing for
+memory-efficient processing of large tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>torch.Tensor</em>) – The input 2D tensor for which the Laplacian is to be computed.</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of the chunks to be processed (default is 100).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed Laplacian of the input tensor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openBOS.utils.compute_laplacian_in_chunks_3D">
+<span class="sig-prename descclassname"><span class="pre">openBOS.utils.</span></span><span class="sig-name descname"><span class="pre">compute_laplacian_in_chunks_3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#openBOS.utils.compute_laplacian_in_chunks_3D" title="Link to this definition"></a></dt>
+<dd><p>Computes the Laplacian of an input 3D tensor in smaller chunks, allowing for
+memory-efficient processing of large tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>torch.Tensor</em>) – The input 3D tensor for which the Laplacian is to be computed.</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of the chunks to be processed (default is 100).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed Laplacian of the input tensor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openBOS.utils.get_gladstone_dale_constant">
+<span class="sig-prename descclassname"><span class="pre">openBOS.utils.</span></span><span class="sig-name descname"><span class="pre">get_gladstone_dale_constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">humidity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.utils.get_gladstone_dale_constant" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Gladstone-Dale constant based on temperature, pressure, and humidity without using metpy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temperature</strong> (<em>float</em>) – Temperature in degrees Celsius (°C).</p></li>
+<li><p><strong>pressure</strong> (<em>float</em>) – Pressure in hectopascals (hPa).</p></li>
+<li><p><strong>humidity</strong> (<em>float</em>) – Humidity as a percentage (%).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><dl class="simple">
+<dt>G<span class="classifier">float</span></dt><dd><p>The calculated Gladstone-Dale constant.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>density<span class="classifier">float</span></dt><dd><p>The density of the atmosphere.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="openBOS.utils.shift2angle">
 <span class="sig-prename descclassname"><span class="pre">openBOS.utils.</span></span><span class="sig-name descname"><span class="pre">shift2angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor_pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution_of_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lci</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openBOS.utils.shift2angle" title="Link to this definition"></a></dt>
 <dd><p>Convert the background image displacement to the angle of light refraction.</p>
-<p>Parameters:
-shift (np.ndarray): Displacement values from the background image.
-ref_array (np.ndarray): Reference image array used for calculations.
-sensor_pitch (float): The pitch of the image sensor in meters.
-resolution_of_pattern (float): The resolution of the pattern in meters per pixel.
-Lb (float): Distance from the background to the object being captured.
-Lci (float): Distance from the image sensor to the object being captured.</p>
-<p>Returns:
-tuple:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>angle (np.ndarray): The calculated angles of light refraction.</p></li>
-<li><p>Lc (float): The distance from the object to the lens.</p></li>
-<li><p>Li (float): The distance from the lens to the image sensor.</p></li>
-<li><p>projection_ratio (float): The ratio of projection based on the dimensions.</p></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – Displacement values from the background image.</p></li>
+<li><p><strong>ref_array</strong> (<em>np.ndarray</em>) – Reference image array used for calculations.</p></li>
+<li><p><strong>sensor_pitch</strong> (<em>float</em>) – The pitch of the image sensor in meters.</p></li>
+<li><p><strong>resolution_of_pattern</strong> (<em>float</em>) – The resolution of the pattern in meters per pixel.</p></li>
+<li><p><strong>Lb</strong> (<em>float</em>) – Distance from the background to the object being captured.</p></li>
+<li><p><strong>Lci</strong> (<em>float</em>) – Distance from the image sensor to the object being captured.</p></li>
 </ul>
-</div></blockquote>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><dl class="simple">
+<dt>angle<span class="classifier">np.ndarray</span></dt><dd><p>The calculated angles of light refraction.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Lc<span class="classifier">float</span></dt><dd><p>The distance from the object to the lens.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Li<span class="classifier">float</span></dt><dd><p>The distance from the lens to the image sensor.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>projection_ratio<span class="classifier">float</span></dt><dd><p>The ratio of projection based on the dimensions.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -419,10 +450,7 @@ tuple:</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-left" title="openBOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="setup.html" class="btn btn-neutral float-right" title="setup module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

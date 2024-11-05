@@ -5,4 +5,3 @@ openBOS
    :maxdepth: 4
 
    openBOS
-   setup

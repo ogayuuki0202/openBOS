@@ -8,7 +8,9 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+if __name__ == "__main__":
+    # コードの実行部分
+    sys.path.insert(0, os.path.abspath('..'))
 
 
 project = 'openBOS'

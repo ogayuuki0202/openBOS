@@ -18,9 +18,9 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
     resolution_of_pattern : float
         The resolution of the pattern in meters per pixel.
     Lb : float
-        Distance from the background to the object being captured.
+        Distance from the background to the object being captured(mm).
     Lci : float
-        Distance from the image sensor to the object being captured.
+        Distance from the image sensor to the object being captured(mm).
 
     Returns
     -------
@@ -34,6 +34,8 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
         - projection_ratio : float
             The ratio of projection based on the dimensions.
     """
+    Lb=Lb*10**3
+    Lci=Lci*10**3
     
     # Size of one LP (in pixels)
     dpLP = ib.cycle(ref_array)

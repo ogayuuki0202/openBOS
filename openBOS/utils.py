@@ -38,7 +38,7 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
     Lci=Lci*10**3
     
     # Size of one LP (in pixels)
-    dpLP = ib.cycle(ref_array)
+    dpLP = ib._cycle(ref_array)
 
     sensor_pitch = sensor_pitch * 10**-3  # Convert sensor pitch from mm to m
     BGmpLP = 1 / resolution_of_pattern * 10**-3  # Convert pattern resolution from mm to m

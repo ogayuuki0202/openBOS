@@ -34,8 +34,8 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
         - projection_ratio : float
             The ratio of projection based on the dimensions.
     """
-    Lb=Lb*10**3
-    Lci=Lci*10**3
+    Lb=Lb*10**-3
+    Lci=Lci*10**-3
     
     # Size of one LP (in pixels)
     dpLP = ib._cycle(ref_array)

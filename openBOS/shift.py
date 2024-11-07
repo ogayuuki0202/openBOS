@@ -103,4 +103,4 @@ def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray):
     # Subtract the overall background movement by dividing by the mean displacement
     diff_comp = diff_comp - np.nanmean(diff_comp[0:1000, 10:100])
 
-    return diff_comp*10**3
+    return diff_comp

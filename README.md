@@ -29,7 +29,7 @@ or clone using git
 
 ## Methods
 
-Please see our [Documentation](https://ogayuuki0202.github.io/openBOS/openBOS.html#module-openBOS).
+Please see our [Documentation](https://ogayuuki0202.github.io/openBOS/index.html).
 
 ## Getting Started
 Here's a quick example of using openBOS for flow visualization:

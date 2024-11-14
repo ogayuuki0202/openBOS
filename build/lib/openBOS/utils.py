@@ -122,8 +122,8 @@ def _compute_laplacian_chunk_2D(array_chunk: torch.Tensor) -> torch.Tensor:
     Tensor
         The Laplacian computed for the given chunk.
     """
-    grad_yy = array_chunk[:, 2:] - 2 * array_chunk[:, 1:-1] + array_chunk[:, :-2]  # y-axis
-    grad_zz = array_chunk[2:, :] - 2 * array_chunk[1:-1, :] + array_chunk[:-2, :]  # z-axis
+    grad_yy = np.gradient(array_chunk, axis=1)
+    grad_zz = np.gradient(array_chunk, axis=2)
     laplacian_chunk = grad_yy + grad_zz
     return laplacian_chunk
 
@@ -142,10 +142,10 @@ def _compute_laplacian_chunk_3D(array_chunk: torch.Tensor) -> torch.Tensor:
     Tensor
         The Laplacian computed for the given chunk.
     """
-    grad_xx = array_chunk[2:, :, :] - 2 * array_chunk[1:-1, :, :] + array_chunk[:-2, :, :]
-    grad_yy = array_chunk[:, 2:, :] - 2 * array_chunk[:, 1:-1, :] + array_chunk[:, :-2, :]
-    grad_zz = array_chunk[:, :, 2:] - 2 * array_chunk[:, :, 1:-1] + array_chunk[:, :, :-2]
-    laplacian_chunk = grad_xx + grad_yy + grad_zz
+    grad_xx = np.gradient(array_chunk, axis=0)
+    grad_yy = np.gradient(array_chunk, axis=1)
+    grad_zz = np.gradient(array_chunk, axis=2)
+    laplacian_chunk = grad_xx+grad_yy + grad_zz
     return laplacian_chunk
 
 def compute_laplacian_in_chunks_2D(array: torch.Tensor, chunk_size: int = 100) -> torch.Tensor:

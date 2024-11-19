@@ -24,34 +24,47 @@ def SSIM(ref_array : np.ndarray, exp_array : np.ndarray):
     diff_inv = -diff
     return diff_inv
 
-def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray):
+def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray, binarization : str ="thresh", thresh : int = 128, freq : int = 500):
     """
     Calculate the displacement map of stripe patterns in experimental images using the Background Oriented Schlieren (BOS) method.
+    
+    This function computes the relative displacement between stripes in a reference and experimental image by compensating for background movement and noise. The displacement map is calculated by processing the images through several steps including image resizing, binarization, boundary detection, noise reduction, displacement calculation, and background compensation.
 
     Parameters
     ----------
     ref_array : np.ndarray
-        The reference grayscale image array.
+        The reference grayscale image array. This image represents the original, undisturbed pattern.
+        
     exp_array : np.ndarray
-        The experimental grayscale image array.
+        The experimental grayscale image array. This image represents the pattern after deformation due to external factors.
+        
+    binarization : str, optional, default="thresh"
+        The method used for binarization of the images. Options are:
+        - "thresh" : Use thresholding for binarization.
+        - "HPfilter" : Use high-pass filtering for binarization.
+        
+    thresh : int, optional, default=128
+        The threshold value used for binarization when `binarization="thresh"`. Pixels with values above the threshold are set to 1, and those below are set to 0.
+        
+    freq : int, optional, default=500
+        The frequency parameter used for high-pass filtering when `binarization="HPfilter"`.
 
     Returns
     -------
     np.ndarray
-        The displacement map with background movement compensated. Each value represents the relative movement
-        of stripes between the reference and experimental images, with noise and background displacements removed.
+        A 2D array representing the displacement map of the stripe patterns, with background movement compensated. Each value represents the relative displacement between the reference and experimental images, with noise and background displacements removed.
 
     Notes
     -----
-    The method follows these steps:
-    1. Vertically stretches both reference and experimental images by a factor of 10.
-    2. Binarizes the stretched images to detect stripe boundaries.
-    3. Identifies upper and lower stripe boundaries and calculates stripe centers for both images.
-    4. Filters noise by removing large displacement values.
-    5. Computes displacement between stripe centers.
-    6. Compensates for background movement by normalizing the displacement map.
+    The method performs the following steps:
+    1. Vertically stretches both the reference and experimental images by a factor of 10.
+    2. Binarizes the images using either thresholding or high-pass filtering.
+    3. Identifies the upper and lower boundaries of the stripes and calculates their centers for both images.
+    4. Filters out noise by removing displacements larger than a certain threshold.
+    5. Computes the displacement between the stripe centers.
+    6. Compensates for background movement by normalizing the displacement map, subtracting the mean displacement over a specified region.
     """
-
+ 
     im_ref=Image.fromarray(ref_array)
     im_exp=Image.fromarray(exp_array)
 
@@ -62,11 +75,18 @@ def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray):
     ar_ref=np.array(im_ref)
     ar_exp=np.array(im_exp)
 
-    # Binarization
-    bin_ref = ib._biner_thresh(ar_ref, 128)
-    bin_exp = ib._biner_thresh(ar_exp, 128)
+    if binarization =="thresh":
+        # Binarization
+        bin_ref = ib._biner_thresh(ar_ref, thresh)
+        bin_exp = ib._biner_thresh(ar_exp, thresh)
 
-    print("Binarization",bin_ref.shape,bin_exp.shape)
+        print("Binarization",bin_ref.shape,bin_exp.shape)
+    elif binarization =="HPfilter":
+        bin_ref=ib._biner_HP(ar_ref, freq)
+        bin_exp=ib._biner_HP(ar_exp, freq)
+        print("Binarization",bin_ref.shape,bin_exp.shape)
+    else:
+        raise ValueError("Binarization is thresh or HPfilter")
     
     # Detect the coordinates of the color boundaries in the binarized reference image
     ref_u, ref_d = ib._bin_indexer(bin_ref)

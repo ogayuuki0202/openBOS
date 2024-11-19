@@ -107,100 +107,58 @@ def get_gladstone_dale_constant(temperature, pressure, humidity):
 
     return G, density_air
 
-def _compute_laplacian_chunk_2D(array_chunk: torch.Tensor) -> torch.Tensor:
+def _compute_laplacian_chunk(array_chunk):
     """
-    Computes the Laplacian of a given 2D chunk by calculating gradients 
-    along specific axes and summing them.
+    Compute the Laplacian for a chunk of an array.
 
     Parameters
     ----------
-    array_chunk : Tensor
-        A chunk of the input tensor to compute the Laplacian on.
+    array_chunk : ndarray
+        A chunk of the original array, assumed to be 3D.
 
     Returns
     -------
-    Tensor
-        The Laplacian computed for the given chunk.
+    laplacian_chunk : ndarray
+        The Laplacian of the input array chunk.
     """
     grad_yy = np.gradient(array_chunk, axis=1)
     grad_zz = np.gradient(array_chunk, axis=2)
     laplacian_chunk = grad_yy + grad_zz
     return laplacian_chunk
 
-def _compute_laplacian_chunk_3D(array_chunk: torch.Tensor) -> torch.Tensor:
+def compute_laplacian_in_chunks(array, chunk_size):
     """
-    Computes the Laplacian of a given 3D chunk by calculating gradients 
-    along specific axes and summing them.
+    Compute the Laplacian of a 3D array in chunks to reduce memory usage.
 
     Parameters
     ----------
-    array_chunk : Tensor
-        A chunk of the input tensor to compute the Laplacian on.
+    array : ndarray
+        The 3D input array for which the Laplacian is calculated.
+    chunk_size : int
+        The size of each chunk along each dimension.
 
     Returns
     -------
-    Tensor
-        The Laplacian computed for the given chunk.
+    laplacian : ndarray
+        The computed Laplacian of the input array.
     """
-    grad_xx = np.gradient(array_chunk, axis=0)
-    grad_yy = np.gradient(array_chunk, axis=1)
-    grad_zz = np.gradient(array_chunk, axis=2)
-    laplacian_chunk = grad_xx+grad_yy + grad_zz
-    return laplacian_chunk
-
-def compute_laplacian_in_chunks_2D(array: torch.Tensor, chunk_size: int = 100) -> torch.Tensor:
-    """
-    Computes the Laplacian of an input 2D tensor in smaller chunks, allowing for 
-    memory-efficient processing of large tensors.
-
-    Parameters
-    ----------
-    array : torch.Tensor
-        The input 2D tensor for which the Laplacian is to be computed.
-    chunk_size : int, optional
-        The size of the chunks to be processed (default is 100).
-
-    Returns
-    -------
-    torch.Tensor
-        The computed Laplacian of the input tensor.
-    """
+    # Get the shape of the input array
     shape = array.shape
-    laplacian = torch.zeros_like(array)
-
-    for i in trange(0, shape[0], chunk_size):            # Loop over x-axis in chunks
-        for j in range(0, shape[1], chunk_size):         # Loop over y-axis in chunks
-            chunk = array[i:i + chunk_size, j:j + chunk_size]
-            laplacian_chunk = _compute_laplacian_chunk_2D(chunk)
-            laplacian[i+1:i + chunk_size-1, j+1:j + chunk_size-1] = laplacian_chunk
-
-    return laplacian
-
-def compute_laplacian_in_chunks_3D(array: torch.Tensor, chunk_size: int = 100) -> torch.Tensor:
-    """
-    Computes the Laplacian of an input 3D tensor in smaller chunks, allowing for 
-    memory-efficient processing of large tensors.
-
-    Parameters
-    ----------
-    array : torch.Tensor
-        The input 3D tensor for which the Laplacian is to be computed.
-    chunk_size : int, optional
-        The size of the chunks to be processed (default is 100).
-
-    Returns
-    -------
-    torch.Tensor
-        The computed Laplacian of the input tensor.
-    """
-    shape = array.shape
-    laplacian = torch.zeros_like(array)
-
-    for i in trange(0, shape[0], chunk_size):            # Loop over x-axis in chunks
-        for j in range(0, shape[1], chunk_size):         # Loop over y-axis in chunks
-            for k in range(0, shape[2], chunk_size):     # Loop over z-axis in chunks
-                chunk = array[i:i + chunk_size, j:j + chunk_size, k:k + chunk_size]
-                laplacian_chunk = _compute_laplacian_chunk_3D(chunk)
-                laplacian[i+1:i + chunk_size-1, j+1:j + chunk_size-1, k+1:k + chunk_size-1] = laplacian_chunk
-
+    
+    # Create an array to store the result
+    laplacian = np.zeros_like(array)
+    
+    # Process each chunk
+    for i in trange(0, shape[0], chunk_size):
+        for j in range(0, shape[1], chunk_size):
+            for k in range(0, shape[2], chunk_size):
+                # Extract the current chunk
+                chunk = array[i:i+chunk_size, j:j+chunk_size, k:k+chunk_size]
+                
+                # Compute the Laplacian for the chunk
+                laplacian_chunk = _compute_laplacian_chunk(chunk)
+                
+                # Store the result in the corresponding position in the original array
+                laplacian[i:i+chunk_size, j:j+chunk_size, k:k+chunk_size] = laplacian_chunk
+    
     return laplacian

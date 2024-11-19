@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from scipy import signal
 
 def _biner_thresh(ar_in: np.ndarray, thresh: int) -> np.ndarray:
     """
@@ -253,3 +254,51 @@ def _cycle(ref_array: np.ndarray):
     
     return cycle
 
+def _biner_HP(ar_in,cycle):
+    # パラメータ設定
+    sample_freq = 1#サンプリング周波数[1/px]
+    cutoff_freq = 1/cycle#カットオフ周波数[1/px]
+    filter_order = 8#次数
+    
+    # フィルタの作成
+    sos_high = signal.butter(filter_order, cutoff_freq, 'highpass', output='sos', fs=sample_freq)
+    #sos_low = signal.butter(filter_order, cutoff_freq, 'lowpass', output='sos', fs=sample_freq)
+    
+    #答え格納用ndarrayの作成(符号付16bitを指定しないと勝手に符号なしにされるZO☆)
+    ar_h=np.zeros_like(ar_in).astype(np.int16)
+    
+    #1行ずつ処理
+    for x in range(ar_in.shape[1]):
+        ar_x=ar_in[:,x]
+        
+        #フィルタの適用
+        ar_h[:,x] = signal.sosfiltfilt(sos_high, ar_x)
+        #yf_l = signal.sosfiltfilt(sos_low, y)
+    
+    #plt.plot(yf_h[100:1500])
+    ar_bin=ar_h>0
+    #y_bin=pd.DataFrame(y_bin*1)
+    
+    
+    
+    #f ar_bin[0,:].sum()==0 or ar_bin[0,:].sum()==ar_bin.shape[1]:
+    first_state=ar_bin[0,0]
+    for x in range(ar_bin.shape[1]):
+        y=0
+        state=ar_bin[0,x]!=first_state
+        
+        while(state==False):
+            ar_bin[y,x]=1-ar_bin[y,x]
+            y=y+1
+            state=ar_bin[y,x]!=first_state
+            
+        
+    #上端の汚い部分をごまかす
+    x=0
+    count=np.nan
+    while(count!=0):
+        count=ar_bin[x-1,:].sum()
+        ar_bin[x,:]=0
+        x=x+1
+    
+    return ar_bin

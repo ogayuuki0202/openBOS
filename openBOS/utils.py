@@ -2,8 +2,9 @@ import numpy as np
 import openBOS.shift_utils as ib
 from tqdm import tqdm,trange
 import torch
+import matplotlib.pyplot as plt
 
-def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, resolution_of_pattern: float, Lb: float, Lci: float):
+def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, resolution_of_background: float, Lb: float, Lci: float):
     """
     Convert the background image displacement to the angle of light refraction.
 
@@ -14,9 +15,9 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
     ref_array : np.ndarray
         Reference image array used for calculations.
     sensor_pitch : float
-        The pitch of the image sensor in meters.
-    resolution_of_pattern : float
-        The resolution of the pattern in meters per pixel.
+        The pitch of the image sensor in mm.
+    resolution_of_background : float
+        The resolution of the background in pixel per mm.
     Lb : float
         Distance from the background to the object being captured(mm).
     Lci : float
@@ -41,7 +42,7 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
     dpLP = ib._cycle(ref_array)
 
     sensor_pitch = sensor_pitch * 10**-3  # Convert sensor pitch from mm to m
-    BGmpLP = 1 / resolution_of_pattern * 10**-3  # Convert pattern resolution from mm to m
+    BGmpLP = 1 / resolution_of_background * 10**-3  # Convert pattern resolution from mm to m
 
     # Size of one LP on the projection plane (m/LP)
     mpLP = dpLP * sensor_pitch
@@ -162,3 +163,32 @@ def compute_laplacian_in_chunks(array, chunk_size):
                 laplacian[i:i+chunk_size, j:j+chunk_size, k:k+chunk_size] = laplacian_chunk
     
     return laplacian
+
+
+def stripe_generator(width:int,height:int,stripe_width:int):
+
+    """
+    Generate a horizontal stripe pattern image and save it as a PNG file.
+
+    Args:
+        width (int): The width of the image in pixels.
+        height (int): The height of the image in pixels.
+        stripe_width (int): The width of each stripe in pixels.
+
+    Returns:
+        None
+    """
+
+    # 横縞パターンの生成
+    image = np.zeros((height, width), dtype=np.uint8)
+    for i in range(height):
+        if (i // stripe_width) % 2 == 0:
+            image[i, :] = 255  # 白 (モノクロ: 255)
+
+    # 画像を表示
+    plt.imshow(image, cmap='binary', interpolation='nearest')
+    plt.axis('off')
+    plt.show()
+
+    # 画像を保存
+    plt.imsave(f'horizontal_stripes{stripe_width}px.png', image, cmap='binary')

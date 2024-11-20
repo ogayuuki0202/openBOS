@@ -3,7 +3,7 @@ from tqdm import tqdm
 from tqdm.contrib import tzip      
 from skimage.transform import radon, iradon                        
 
-def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
+def abel_transform(angle: np.ndarray, center: float, G: float):
     """
     Perform the Abel transform to convert refractive angle values into density differences.
 
@@ -18,8 +18,6 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
         A 2D numpy array representing refractive angles for each pixel.
     center : float
         The index along the y-axis corresponding to the central axis of the transform.
-    ref_x : float
-        A reference x-coordinate to compute and offset background movement.
     G : float
         The Gladstone-Dale constant, used to convert the computed refractive index differences
         to density differences.
@@ -80,7 +78,7 @@ def abel_transform(angle: np.ndarray, center: float, ref_x: float, G: float):
 
     return density
 
-def ART(sinogram, mu, e, bpos=True):
+def ART(sinogram, mu, e, reconstruction_angle : float,circle=True):
     """
     Perform Algebraic Reconstruction Technique (ART) to reconstruct images from a sinogram.
 
@@ -120,7 +118,7 @@ def ART(sinogram, mu, e, bpos=True):
     """
     
     N = 1  # Initial grid size for reconstruction
-    ANG = 180  # Total rotation angle for projections
+    ANG = reconstruction_angle  # Total rotation angle for projections
     VIEW = sinogram[0].shape[0]  # Number of views (angles) in each projection
     THETA = np.linspace(0, ANG, VIEW + 1)[:-1]  # Angles for radon transform
     pbar = tqdm(total=sinogram[0].shape[0], desc="Initialization", unit="task")
@@ -131,11 +129,11 @@ def ART(sinogram, mu, e, bpos=True):
 
         def A(x):
             # Forward projection (Radon transform)
-            return radon(x, THETA, circle=False).astype(np.float32)
+            return radon(x, THETA, circle=circle).astype(np.float32)
 
         def AT(y):
             # Backprojection (inverse Radon transform)
-            return iradon(y, THETA, circle=False, output_size=N).astype(np.float32) / (np.pi/2 * len(THETA))
+            return iradon(y, THETA, circle=circle, output_size=N).astype(np.float32) / (np.pi/2 * len(THETA))
         
         ATA = AT(A(np.ones_like(x)))  # ATA matrix for scaling
 

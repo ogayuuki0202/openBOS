@@ -3,7 +3,7 @@ from tqdm import tqdm
 from tqdm.contrib import tzip      
 from skimage.transform import radon, iradon                        
 
-def abel_transform(angle: np.ndarray, center: float):
+def abel_transform(angle: np.ndarray, center: float,winy0,winy2,winx0,winx1):
     """
     Perform the Abel transform to convert refractive angle values into density differences.
 
@@ -29,17 +29,10 @@ def abel_transform(angle: np.ndarray, center: float):
     This function calculates density differences through an integral-based approach. The refractive
     angle image is rotated to align with the axis of symmetry, and values are integrated from the
     center outwards, adjusting for axial symmetry.
-
-    Examples
-    --------
-    >>> angle_image = np.random.rand(200, 300)  # Simulated refractive angle image
-    >>> density_differences = abel_transform(angle_image, center=150, ref_x=50, G=0.0001)
-    >>> print(density_differences.shape)
-    (150,)
     """
     
     # Offset the angle values by subtracting the mean value at the reference x-coordinate
-    angle = angle - np.mean(angle[0])
+    angle = angle - np.mean(angle[winy0:winy2,winx0:winx1])
     
     # Remove values below the center since they are not used in the calculation
     angle = angle[0:center]

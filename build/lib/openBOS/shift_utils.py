@@ -1,4 +1,5 @@
 import numpy as np
+from PIL import Image
 import pandas as pd
 from scipy import signal
 
@@ -225,7 +226,8 @@ def _cycle(ref_array: np.ndarray):
     """
     
     # Vertically stretch the reference image by a factor of 10
-    im_ref = np.repeat(ref_array, 10, axis=0)
+    im_ref=Image.fromarray(ref_array)
+    im_ref=im_ref.resize((im_ref.size[0],im_ref.size[1]*10))
     
     # Convert the stretched image to a numpy array
     ar_ref = np.array(im_ref)

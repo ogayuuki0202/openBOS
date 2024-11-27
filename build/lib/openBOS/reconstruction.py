@@ -3,7 +3,7 @@ from tqdm import tqdm
 from tqdm.contrib import tzip      
 from skimage.transform import radon, iradon                        
 
-def abel_transform(angle: np.ndarray, center: float, G: float):
+def abel_transform(angle: np.ndarray, center: float):
     """
     Perform the Abel transform to convert refractive angle values into density differences.
 
@@ -18,9 +18,6 @@ def abel_transform(angle: np.ndarray, center: float, G: float):
         A 2D numpy array representing refractive angles for each pixel.
     center : float
         The index along the y-axis corresponding to the central axis of the transform.
-    G : float
-        The Gladstone-Dale constant, used to convert the computed refractive index differences
-        to density differences.
 
     Returns
     -------

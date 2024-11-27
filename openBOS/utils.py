@@ -17,7 +17,7 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
     sensor_pitch : float
         The pitch of the image sensor in mm.
     resolution_of_background : float
-        The resolution of the background in pixel per mm.
+        It represents the number of lines per mm.
     Lb : float
         Distance from the background to the object being captured(mm).
     Lci : float

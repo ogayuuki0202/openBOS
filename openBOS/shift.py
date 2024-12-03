@@ -38,7 +38,7 @@ def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray, binarization : str ="
     exp_array : np.ndarray
         The experimental grayscale image array. This image represents the pattern after deformation due to external factors.
         
-    binarization : str, optional, default="thresh"
+    binarization : str, optional, default="HPfilter"
         The method used for binarization of the images. Options are:
         - "thresh" : Use thresholding for binarization.
         - "HPfilter" : Use high-pass filtering for binarization.

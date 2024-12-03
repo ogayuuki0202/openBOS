@@ -22,8 +22,7 @@ INSTALL_REQUIRES = [
     'scikit-image>=0.24.0',
     'tqdm >=4.0',
     "pillow >= 6.0",
-    "scipy >=1.0",
-    "open3d >= 0.10.0"
+    "scipy >=1.0"
 ]
 
 EXTRAS_REQUIRE = {

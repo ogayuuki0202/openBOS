@@ -3,7 +3,7 @@ import openBOS.shift_utils as ib
 from tqdm import tqdm,trange
 import matplotlib.pyplot as plt
 
-def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, resolution_of_background: float, Lb: float, Lci: float):
+def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, resolution_of_background: float, Lb: float, Lci: float, binarization : str ="HPfilter", thresh : int = 128, freq : int = 500):
     """
     Convert the background image displacement to the angle of light refraction.
 
@@ -21,6 +21,17 @@ def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, r
         Distance from the background to the object being captured(mm).
     Lci : float
         Distance from the image sensor to the object being captured(mm).
+    
+    binarization : str, optional, default="HPfilter"
+        The method used for binarization of the images. Options are:
+        - "thresh" : Use thresholding for binarization.
+        - "HPfilter" : Use high-pass filtering for binarization.
+        
+    thresh : int, optional, default=128
+        The threshold value used for binarization when `binarization="thresh"`. Pixels with values above the threshold are set to 1, and those below are set to 0.
+        
+    freq : int, optional, default=500
+        The frequency parameter used for high-pass filtering when `binarization="HPfilter"`.
 
     Returns
     -------

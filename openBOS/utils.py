@@ -1,7 +1,6 @@
 import numpy as np
 import openBOS.shift_utils as ib
 from tqdm import tqdm,trange
-import torch
 import matplotlib.pyplot as plt
 
 def shift2angle(shift: np.ndarray, ref_array: np.ndarray, sensor_pitch: float, resolution_of_background: float, Lb: float, Lci: float):

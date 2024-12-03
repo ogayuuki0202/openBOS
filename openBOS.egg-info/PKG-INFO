@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: openBOS
-Version: 0.0.38
+Version: 0.0.41
 Summary: the library of Background Oriented Schlieren
 Home-page: https://github.com/ogayuuki0202/openBOS
 Download-URL: https://github.com/ogayuuki0202/openBOS
@@ -31,7 +31,7 @@ Requires-Dist: scikit-image>=0.24.0
 Requires-Dist: tqdm>=4.0
 Requires-Dist: pillow>=6.0
 Requires-Dist: scipy>=1.0
-Requires-Dist: open3d>=0.16.0
+Requires-Dist: open3d>=0.10.0
 
 # openBOS
 # It's still in development so don't use this code!

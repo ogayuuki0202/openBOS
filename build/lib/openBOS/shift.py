@@ -24,7 +24,7 @@ def SSIM(ref_array : np.ndarray, exp_array : np.ndarray):
     diff_inv = -diff
     return diff_inv
 
-def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray, binarization : str ="thresh", thresh : int = 128, freq : int = 500):
+def SP_BOS(ref_array : np.ndarray, exp_array : np.ndarray, binarization : str ="HPfilter", thresh : int = 128, freq : int = 500):
     """
     Calculate the displacement map of stripe patterns in experimental images using the Background Oriented Schlieren (BOS) method.
     

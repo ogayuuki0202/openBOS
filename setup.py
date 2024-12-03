@@ -23,7 +23,7 @@ INSTALL_REQUIRES = [
     'tqdm >=4.0',
     "pillow >= 6.0",
     "scipy >=1.0",
-    "open3d >= 0.16.0"
+    "open3d >= 0.10.0"
 ]
 
 EXTRAS_REQUIRE = {

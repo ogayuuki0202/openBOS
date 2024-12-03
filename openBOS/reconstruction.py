@@ -3,7 +3,7 @@ from tqdm import tqdm
 from tqdm.contrib import tzip      
 from skimage.transform import radon, iradon                        
 
-def abel_transform(angle: np.ndarray, center: float,winy0,winy2,winx0,winx1):
+def abel_transform(angle: np.ndarray, center: float, winy0: int, winy1: int, winx0: int, winx1: int) -> np.ndarray:
     """
     Perform the Abel transform to convert refractive angle values into density differences.
 
@@ -18,11 +18,19 @@ def abel_transform(angle: np.ndarray, center: float,winy0,winy2,winx0,winx1):
         A 2D numpy array representing refractive angles for each pixel.
     center : float
         The index along the y-axis corresponding to the central axis of the transform.
+    winy0 : int
+        The starting index along the y-axis for the region used to calculate the background mean.
+    winy1 : int
+        The ending index along the y-axis for the region used to calculate the background mean.
+    winx0 : int
+        The starting index along the x-axis for the region used to calculate the background mean.
+    winx1 : int
+        The ending index along the x-axis for the region used to calculate the background mean.
 
     Returns
     -------
     np.ndarray
-        A 2D array of refeactive index differences derived from the Abel transform.
+        A 2D array of refractive index differences derived from the Abel transform.
 
     Notes
     -----
@@ -32,7 +40,7 @@ def abel_transform(angle: np.ndarray, center: float,winy0,winy2,winx0,winx1):
     """
     
     # Offset the angle values by subtracting the mean value at the reference x-coordinate
-    angle = angle - np.mean(angle[winy0:winy2,winx0:winx1])
+    angle = angle - np.mean(angle[winy0:winy1,winx0:winx1])
     
     # Remove values below the center since they are not used in the calculation
     angle = angle[0:center]
